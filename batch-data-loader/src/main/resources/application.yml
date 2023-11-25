@@ -1,0 +1,31 @@
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  level:
+    root: warn
+    '[org.jmresler.fbi.nibrs]': debug
+
+spring:
+  application:
+    name: mmp
+  batch:
+    jdbc:
+      initialize-schema: always
+  datasource:
+    password: jmlawb36
+    username: john
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fbi_crime_stats
+  jpa:
+    database: mysql
+    generate-ddl: true
+    open-in-view: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+
+
+  profiles:
+    active: ${RUNTIME_ENV:dev}

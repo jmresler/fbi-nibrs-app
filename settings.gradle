@@ -1,0 +1,3 @@
+rootProject.name = 'multi-module-spring-app'
+include('batch-data-loader')
+include('fbi-nibrs-entities')
