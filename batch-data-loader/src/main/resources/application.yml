@@ -25,7 +25,19 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-
-
   profiles:
     active: ${RUNTIME_ENV:dev}
+
+org:
+  jmresler:
+    nibrs:
+      batch:
+        props:
+        chunk-size: 10
+        allowed-skips: 10
+      email:
+        server: localhost
+        port: 25
+        sender: rmic@rocketmail.com
+        password: password
+        recipients: me, myself, i
