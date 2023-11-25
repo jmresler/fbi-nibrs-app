@@ -1,5 +1,6 @@
 DROP SCHEMA IF EXISTS `nibrs`;
 CREATE SCHEMA `nibrs` ;
+use `nibrs`;
 
 CREATE TABLE agencies (
     yearly_agency_id INTEGER,

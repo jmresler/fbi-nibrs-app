@@ -28,7 +28,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "nibrs_criminal_act", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "nibrs_criminal_act")
 public class NibrsCriminalAct implements Serializable {
 
     @Serial

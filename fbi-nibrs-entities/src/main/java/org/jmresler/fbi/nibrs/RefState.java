@@ -31,7 +31,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "ref_state", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "ref_state")
 public class RefState implements Serializable {
 
     @Serial

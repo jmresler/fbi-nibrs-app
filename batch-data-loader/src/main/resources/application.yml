@@ -15,10 +15,10 @@ spring:
     password: jmlawb36
     username: john
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/fbi_crime_stats
+    url: jdbc:mysql://localhost:3306/nibrs
   jpa:
     database: mysql
-    generate-ddl: true
+    generate-ddl: false
     open-in-view: true
     properties:
       hibernate:

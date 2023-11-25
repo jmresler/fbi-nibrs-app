@@ -30,7 +30,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "nibrs_month", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "nibrs_month")
 public class NibrsMonth implements Serializable {
 
     @Serial

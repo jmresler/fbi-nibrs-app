@@ -29,7 +29,7 @@ import java.util.Collection;
  */
 @Data
 @Entity
-@Table(name = "nibrs_activity_type", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "nibrs_activity_type")
 public class NibrsActivityType implements Serializable {
 
     @Serial

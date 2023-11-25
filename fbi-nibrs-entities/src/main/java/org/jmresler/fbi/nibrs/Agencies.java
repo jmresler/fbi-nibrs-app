@@ -31,7 +31,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "agencies", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "agencies")
 public class Agencies implements Serializable {
 
     @Serial

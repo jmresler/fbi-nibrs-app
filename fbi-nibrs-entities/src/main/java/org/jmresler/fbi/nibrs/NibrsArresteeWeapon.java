@@ -29,7 +29,7 @@ import java.math.BigInteger;
  */
 @Data
 @Entity
-@Table(name = "nibrs_arrestee_weapon", catalog = "fbi_crime_stats", schema = "public")
+@Table(name = "nibrs_arrestee_weapon")
 public class NibrsArresteeWeapon implements Serializable {
 
     @Serial
