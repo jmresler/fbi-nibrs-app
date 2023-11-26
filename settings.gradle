@@ -1,3 +1,4 @@
-rootProject.name = 'multi-module-spring-app'
+rootProject.name = 'fbi-nibrs-applications'
 include('batch-data-loader')
-include('fbi-nibrs-entities')
+include('fbi-nibrs-entities-mysql')
+include('fbi-nibrs-entities-postgres')

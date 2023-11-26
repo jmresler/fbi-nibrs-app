@@ -12,8 +12,8 @@ spring:
     jdbc:
       initialize-schema: always
   datasource:
-    password: jmlawb36
-    username: john
+    password: Kadena1988#
+    username: johnm
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/nibrs
   jpa:

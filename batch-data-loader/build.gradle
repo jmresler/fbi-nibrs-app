@@ -19,14 +19,7 @@ group = 'org.jmresler.nibrs'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '20'
-}
-
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+	sourceCompatibility = '21'
 }
 
 configurations {
@@ -115,7 +108,7 @@ clean {
 
 dependencies {
 
-	implementation project(':fbi-nibrs-entities')
+	implementation project(':fbi-nibrs-entities-mysql')
 
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
