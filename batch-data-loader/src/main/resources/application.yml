@@ -9,13 +9,16 @@ spring:
   application:
     name: mmp
   batch:
+    job:
+      enabled: false
     jdbc:
       initialize-schema: always
   datasource:
-    password: Kadena1988#
-    username: johnm
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/nibrs
+    nibrs:
+      password: Kadena1988#
+      username: johnm
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/nibrs
   jpa:
     database: mysql
     generate-ddl: false
