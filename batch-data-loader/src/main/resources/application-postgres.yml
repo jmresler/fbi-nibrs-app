@@ -1,0 +1,33 @@
+logging:
+  level:
+    root: warn
+    org.jmresler.fbi.nibrs: debug
+  file:
+    name: logs/${spring.application.name}.log
+
+spring:
+  application:
+    name: batch-data-loader
+  batch:
+    jdbc:
+      initialize-schema: embedded
+      platform: h2
+    job:
+      enabled: false
+  datasource:
+    driver-class-name:
+    name: jmres
+    password: jmlawb36
+    url: jdbc:postgresql://localhost:5432/nibrs
+    hikari:
+      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+  jpa:
+    generate-ddl: false
+    database: postgresql
+    open-in-view: true
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+

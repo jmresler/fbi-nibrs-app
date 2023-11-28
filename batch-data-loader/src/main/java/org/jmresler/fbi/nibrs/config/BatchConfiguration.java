@@ -18,54 +18,54 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class BatchConfiguration {
-//
-//    @Bean
-//    public Job loadJob(
-//            final JobRepository repository,
-//            final ApplicationListener applicationListener,
-//            final Step loadStep
-//    ) {
-//        return new JobBuilder("load-job", repository)
-//                .listener(applicationListener)
-//                .start(loadStep)
-//                .build();
-//    }
-//
-//    @Bean
-//    public Step loadStep(
-//            final PlatformTransactionManager transactionManager,
-//            final JobRepository repository,
-//            final ApplicationListener applicationListener
-//            ) {
-//        return new StepBuilder("load-step", repository)
-//                .listener(applicationListener)
-//                .chunk(100, transactionManager)
-//                .reader(new JdbcPagingItemReader<>(){{
-//                    setName("paging-item-reader");
-//                    setRowMapper(new BeanPropertyRowMapper<>(){{
-//
-//                    }});
-//                }})
-//                .writer(new JpaItemWriter<>())
-//                .build();
-//    }
-//
-//
-//    // listeners
-//    @Bean
-//    public ItemReader<Agencies> agenciesItemReader() {
-//        return () -> null;
-//    }
-//
-//    @Bean
-//    public ItemWriter<Agencies> agenciesItemWriter() {
-//        return chunk -> {
-//
-//        };
-//    }
-//
-//    @Bean
-//    public ApplicationListener applicationListener() {
-//        return new ApplicationListener();
-//    }
+
+    @Bean
+    public Job loadJob(
+            final JobRepository repository,
+            final ApplicationListener applicationListener,
+            final Step loadStep
+    ) {
+        return new JobBuilder("load-job", repository)
+                .listener(applicationListener)
+                .start(loadStep)
+                .build();
+    }
+
+    @Bean
+    public Step loadStep(
+            final PlatformTransactionManager transactionManager,
+            final JobRepository repository,
+            final ApplicationListener applicationListener
+            ) {
+        return new StepBuilder("load-step", repository)
+                .listener(applicationListener)
+                .chunk(100, transactionManager)
+                .reader(new JdbcPagingItemReader<>(){{
+                    setName("paging-item-reader");
+                    setRowMapper(new BeanPropertyRowMapper<>(){{
+
+                    }});
+                }})
+                .writer(new JpaItemWriter<>())
+                .build();
+    }
+
+
+    // listeners
+    @Bean
+    public ItemReader<Agencies> agenciesItemReader() {
+        return () -> null;
+    }
+
+    @Bean
+    public ItemWriter<Agencies> agenciesItemWriter() {
+        return chunk -> {
+
+        };
+    }
+
+    @Bean
+    public ApplicationListener applicationListener() {
+        return new ApplicationListener();
+    }
 }

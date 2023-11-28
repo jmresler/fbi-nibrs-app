@@ -20,6 +20,8 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.findAll();
+		repository.findAll().forEach(agency -> {
+			log.debug(agency.toString());
+		});
 	}
 }

@@ -1,12 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Collection;
 import lombok.Data;
@@ -41,6 +36,6 @@ public class NibrsOffenseType implements Serializable {
     private String offenseGroup;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode")
     private Collection<NibrsArrestee> nibrsArresteeCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode", fetch = FetchType.LAZY)
     private Collection<NibrsOffense> nibrsOffenseCollection;
 }

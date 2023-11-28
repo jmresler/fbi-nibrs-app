@@ -162,8 +162,8 @@ public class Agencies implements Serializable {
     private String participated;
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = FetchType.EAGER)
     private Collection<NibrsMonth> nibrsMonthCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = FetchType.EAGER)
     private Collection<NibrsIncident> nibrsIncidentCollection;
 }
