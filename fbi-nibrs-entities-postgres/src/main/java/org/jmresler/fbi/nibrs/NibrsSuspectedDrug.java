@@ -22,8 +22,7 @@ public class NibrsSuspectedDrug implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "data_year")
     private Integer dataYear;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "est_drug_qty", precision = 17, scale = 17)
+    @Column(name = "est_drug_qty", precision = 17)
     private Double estDrugQty;
     @Id
     @Basic(optional = false)

@@ -14,14 +14,15 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	protected AgencyRepository repository;
 
+	private static final Agencies EMPTY_AGENCY = new Agencies();
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.findAll().forEach(agency -> {
-			log.debug(agency.toString());
-		});
+		var agency49 = repository.findById(49).orElse(EMPTY_AGENCY);
+		log.debug("Public Agency Name {}, UCR Agency Name {}", agency49.getPubAgencyName(), agency49.getUcrAgencyName());
 	}
 }
