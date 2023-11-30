@@ -17,6 +17,7 @@ package org.jmresler.fbi.nibrs;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -25,6 +26,7 @@ import java.io.Serializable;
  * @author John M. Resler
  * @version 1.0.0
  */
+@Data
 @Embeddable
 public class NibrsSuspectUsingPK implements Serializable {
 

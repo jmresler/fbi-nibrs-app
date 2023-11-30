@@ -1,7 +1,7 @@
 logging:
   level:
     root: warn
-    org.jmresler.fbi.nibrs: debug
+    '[org.jmresler.fbi.nibrs]': debug
   file:
     name: logs/${spring.application.name}.log
 
@@ -10,23 +10,29 @@ spring:
     name: batch-data-loader
   batch:
     jdbc:
-      initialize-schema: embedded
-      platform: h2
+      initialize-schema: always
     job:
-      enabled: false
+      enabled: true
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    name: jmres
-    password: Kadena1988#
-    url: jdbc:mysql://localhost:3306/nibrs
-    hikari:
-      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+    nibrs:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      name: johnm
+      password: jmlawb36
+      url: jdbc:mysql://localhost:3306/nibrs
+      hikari:
+        transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+    meta:
+      driver-class-name: org.h2.Driver
+      name: app
+      password: app
+      url: jdbc:h2:file:./data/meta
+      hikari:
+        transaction-isolation: TRANSACTION_READ_UNCOMMITTED
   jpa:
     generate-ddl: false
-    database: mysql
     open-in-view: true
-#    properties:
-#      hibernate:
-#        show_sql: true
-#        use_sql_comments: true
-#        format_sql: true
+    properties:
+      hibernate:
+        '[show_sql]': true
+        '[use_sql_comments]': true
+        '[format_sql]': true

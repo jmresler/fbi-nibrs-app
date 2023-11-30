@@ -22,7 +22,6 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var agency49 = repository.findById(49).orElse(EMPTY_AGENCY);
-		log.debug("Public Agency Name {}, UCR Agency Name {}", agency49.getPubAgencyName(), agency49.getUcrAgencyName());
+		log.debug("Agency status: {}", repository.findById(2).orElse(EMPTY_AGENCY).getAgencyStatus());
 	}
 }
