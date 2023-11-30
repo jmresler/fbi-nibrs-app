@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
@@ -129,9 +129,9 @@ public class Agencies implements Serializable {
     @Column(name = "female_total")
     private Integer femaleTotal;
     @Column(name = "officer_rate")
-    private BigInteger officerRate;
+    private BigDecimal officerRate;
     @Column(name = "employee_rate")
-    private BigInteger employeeRate;
+    private BigDecimal employeeRate;
     @Column(name = "nibrs_cert_date")
     @Temporal(TemporalType.DATE)
     private Date nibrsCertDate;

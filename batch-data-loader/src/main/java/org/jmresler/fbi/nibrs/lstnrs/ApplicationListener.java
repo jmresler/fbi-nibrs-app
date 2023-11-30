@@ -13,7 +13,7 @@ public class ApplicationListener implements JobExecutionListener, StepExecutionL
 
     @Override
     public void afterJob(JobExecution jobExecution) {
-        JobExecutionListener.super.afterJob(jobExecution);
+
     }
 
     @Override
@@ -23,6 +23,7 @@ public class ApplicationListener implements JobExecutionListener, StepExecutionL
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
+        log.debug("{} had rows skipped {}", stepExecution.getStepName(), stepExecution.getSkipCount());
         return StepExecutionListener.super.afterStep(stepExecution);
     }
 }

@@ -108,7 +108,7 @@ clean {
 
 dependencies {
 
-	implementation project(':fbi-nibrs-entities-mysql')
+	implementation project(':fbi-nibrs-entities-postgres')
 
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -123,9 +123,11 @@ dependencies {
 
 
 	developmentOnly "org.springframework.boot:spring-boot-devtools"
-	testRuntimeOnly "com.h2database:h2"
 
+	runtimeOnly 'com.h2database:h2:2.1.210'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+	runtimeOnly 'org.postgresql:postgresql:42.7.0'
+
 
 	testImplementation 'org.assertj:assertj-core:3.21.0'
 	testImplementation "org.springframework.boot:spring-boot-starter-test"

@@ -1,35 +1,8 @@
-logging:
-  file:
-    name: logs/${spring.application.name}.log
-  level:
-    root: warn
-    '[org.jmresler.fbi.nibrs]': debug
-
 spring:
   application:
-    name: mmp
-  batch:
-    job:
-      enabled: false
-    jdbc:
-      initialize-schema: always
-  datasource:
-    nibrs:
-      password: Kadena1988#
-      username: johnm
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/nibrs
-  jpa:
-    database: mysql
-    generate-ddl: false
-    open-in-view: true
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        use_sql_comments: true
+    name: nibrs-batch
   profiles:
-    active: ${RUNTIME_ENV:dev}
+    active: ${RUNTIME_ENV:postgres}
 
 org:
   jmresler:

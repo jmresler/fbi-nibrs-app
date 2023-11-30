@@ -64,9 +64,9 @@ public class NibrsIncident implements Serializable {
     private Character dataHome;
     @Column(name = "orig_format")
     private Character origFormat;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId", fetch = FetchType.EAGER)
     private Collection<NibrsArrestee> nibrsArresteeCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId", fetch = FetchType.EAGER)
     private Collection<NibrsOffense> nibrsOffenseCollection;
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
