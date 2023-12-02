@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,7 +23,6 @@ public class NibrsBiasList implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "bias_id", nullable = false)
     private Short biasId;
     @Column(name = "bias_code", length = 2)
@@ -31,6 +31,8 @@ public class NibrsBiasList implements Serializable {
     private String biasName;
     @Column(name = "bias_desc", length = 100)
     private String biasDesc;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsBiasList")
     private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+
 }

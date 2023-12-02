@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +28,6 @@ public class NibrsOffender implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "offender_id", nullable = false)
     private Long offenderId;
     @Column(name = "offender_seq_num")
@@ -39,18 +40,23 @@ public class NibrsOffender implements Serializable {
     private Short ageRangeLowNum;
     @Column(name = "age_range_high_num")
     private Short ageRangeHighNum;
+    @JsonBackReference
     @JoinColumn(name = "age_id", referencedColumnName = "age_id")
     @ManyToOne
     private NibrsAge ageId;
+    @JsonBackReference
     @JoinColumn(name = "ethnicity_id", referencedColumnName = "ethnicity_id")
     @ManyToOne
     private NibrsEthnicity ethnicityId;
+    @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
+    @JsonBackReference
     @JoinColumn(name = "race_id", referencedColumnName = "race_id")
     @ManyToOne
     private RefRace raceId;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffender")
     private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
 }

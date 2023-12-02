@@ -14,10 +14,8 @@ import lombok.Data;
 @Embeddable
 public class NibrsPropertyDescPK implements Serializable {
 
-    @Basic(optional = false)
     @Column(name = "property_id", nullable = false)
     private long propertyId;
-    @Basic(optional = false)
     @Column(name = "prop_desc_id", nullable = false)
     private short propDescId;
 }

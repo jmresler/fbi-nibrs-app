@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,7 +25,6 @@ public class NibrsCircumstances implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "circumstances_id", nullable = false)
     private Short circumstancesId;
     @Column(name = "circumstances_type")
@@ -33,6 +33,9 @@ public class NibrsCircumstances implements Serializable {
     private Short circumstancesCode;
     @Column(name = "circumstances_name", length = 100)
     private String circumstancesName;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCircumstances")
     private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+
+
 }

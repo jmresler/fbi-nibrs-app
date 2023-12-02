@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +28,6 @@ public class NibrsOffense implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "offense_id", nullable = false)
     private Long offenseId;
     @Column(name = "attempt_complete_flag")
@@ -35,23 +36,31 @@ public class NibrsOffense implements Serializable {
     private Short numPremisesEntered;
     @Column(name = "method_entry_code")
     private Character methodEntryCode;
+    @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
+    @JsonBackReference
     @JoinColumn(name = "location_id", referencedColumnName = "location_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsLocationType locationId;
+    @JsonBackReference
     @JoinColumn(name = "offense_code", referencedColumnName = "offense_code", nullable = false)
     @ManyToOne(optional = false)
     private NibrsOffenseType offenseCode;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsWeapon> nibrsWeaponCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsSuspectUsing> nibrsSuspectUsingCollection;
 }

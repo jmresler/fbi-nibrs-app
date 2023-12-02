@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,13 +22,13 @@ public class NibrsJustifiableForce implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "justifiable_force_id", nullable = false)
     private Short justifiableForceId;
     @Column(name = "justifiable_force_code")
     private Character justifiableForceCode;
     @Column(name = "justifiable_force_name", length = 100)
     private String justifiableForceName;
+    @JsonManagedReference
     @OneToMany(mappedBy = "justifiableForceId")
     private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
 }

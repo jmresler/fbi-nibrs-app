@@ -14,10 +14,8 @@ import lombok.Data;
 @Embeddable
 public class NibrsArresteeWeaponPK implements Serializable {
 
-    @Basic(optional = false)
     @Column(name = "arrestee_id", nullable = false)
     private long arresteeId;
-    @Basic(optional = false)
     @Column(name = "weapon_id", nullable = false)
     private short weaponId;
 }

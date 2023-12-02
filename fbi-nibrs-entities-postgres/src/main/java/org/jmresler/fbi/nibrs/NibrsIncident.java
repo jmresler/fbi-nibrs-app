@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,10 +33,8 @@ public class NibrsIncident implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "incident_id", nullable = false)
     private Long incidentId;
-    @Basic(optional = false)
     @Column(name = "nibrs_month_id", nullable = false)
     private long nibrsMonthId;
     @Column(name = "cargo_theft_flag")
@@ -58,23 +58,31 @@ public class NibrsIncident implements Serializable {
     private Character dataHome;
     @Column(name = "orig_format")
     private Character origFormat;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
     private Collection<NibrsArrestee> nibrsArresteeCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
     private Collection<NibrsOffense> nibrsOffenseCollection;
+    @JsonBackReference
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
     private Agencies agencyId;
+    @JsonBackReference
     @JoinColumn(name = "cleared_except_id", referencedColumnName = "cleared_except_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsClearedExcept clearedExceptId;
+    @JsonBackReference
     @JoinColumn(name = "did", referencedColumnName = "did")
     @ManyToOne
     private NibrsMonth did;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
     private Collection<NibrsOffender> nibrsOffenderCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
     private Collection<NibrsProperty> nibrsPropertyCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
     private Collection<NibrsVictim> nibrsVictimCollection;
 }

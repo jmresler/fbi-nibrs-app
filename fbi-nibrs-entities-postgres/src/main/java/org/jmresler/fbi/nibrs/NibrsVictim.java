@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,7 +29,6 @@ public class NibrsVictim implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "victim_id", nullable = false)
     private Long victimId;
     @Column(name = "victim_seq_num")
@@ -44,33 +45,44 @@ public class NibrsVictim implements Serializable {
     private Short ageRangeLowNum;
     @Column(name = "age_range_high_num")
     private Short ageRangeHighNum;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
     private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
     private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
     private Collection<NibrsVictimInjury> nibrsVictimInjuryCollection;
+    @JsonBackReference
     @JoinColumn(name = "activity_type_id", referencedColumnName = "activity_type_id")
     @ManyToOne
     private NibrsActivityType activityTypeId;
+    @JsonBackReference
     @JoinColumn(name = "age_id", referencedColumnName = "age_id")
     @ManyToOne
     private NibrsAge ageId;
+    @JsonBackReference
     @JoinColumn(name = "assignment_type_id", referencedColumnName = "assignment_type_id")
     @ManyToOne
     private NibrsAssignmentType assignmentTypeId;
+    @JsonBackReference
     @JoinColumn(name = "ethnicity_id", referencedColumnName = "ethnicity_id")
     @ManyToOne
     private NibrsEthnicity ethnicityId;
+    @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
+    @JsonBackReference
     @JoinColumn(name = "victim_type_id", referencedColumnName = "victim_type_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsVictimType victimTypeId;
+    @JsonBackReference
     @JoinColumn(name = "race_id", referencedColumnName = "race_id")
     @ManyToOne
     private RefRace raceId;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
     private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
 }

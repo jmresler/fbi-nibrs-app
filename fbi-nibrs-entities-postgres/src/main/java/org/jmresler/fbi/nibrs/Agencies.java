@@ -15,14 +15,17 @@
  */
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+
+import static jakarta.persistence.FetchType.EAGER;
 
 /**
  *
@@ -37,11 +40,11 @@ public class Agencies implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "yearly_agency_id")
-    private Integer yearlyAgencyId;
     @Id
     @Column(name = "agency_id", nullable = false)
     private Integer agencyId;
+    @Column(name = "yearly_agency_id")
+    private Integer yearlyAgencyId;
     @Column(name = "data_year")
     private Integer dataYear;
     @Column(name = "ori", length = 25)
@@ -162,8 +165,11 @@ public class Agencies implements Serializable {
     private String participated;
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = EAGER)
     private Collection<NibrsMonth> nibrsMonthCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = EAGER)
     private Collection<NibrsIncident> nibrsIncidentCollection;
+
 }

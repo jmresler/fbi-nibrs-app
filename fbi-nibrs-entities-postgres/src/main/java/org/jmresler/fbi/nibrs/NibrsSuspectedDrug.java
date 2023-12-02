@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,15 +26,17 @@ public class NibrsSuspectedDrug implements Serializable {
     @Column(name = "est_drug_qty", precision = 17)
     private Double estDrugQty;
     @Id
-    @Basic(optional = false)
     @Column(name = "nibrs_suspected_drug_id", nullable = false)
     private Long nibrsSuspectedDrugId;
+    @JsonBackReference
     @JoinColumn(name = "drug_measure_type_id", referencedColumnName = "drug_measure_type_id")
     @ManyToOne
     private NibrsDrugMeasureType drugMeasureTypeId;
+    @JsonBackReference
     @JoinColumn(name = "property_id", referencedColumnName = "property_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsProperty propertyId;
+    @JsonBackReference
     @JoinColumn(name = "suspected_drug_type_id", referencedColumnName = "suspected_drug_type_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsSuspectedDrugType suspectedDrugTypeId;

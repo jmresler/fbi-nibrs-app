@@ -14,10 +14,8 @@ import lombok.Data;
 @Embeddable
 public class NibrsVictimInjuryPK implements Serializable {
 
-    @Basic(optional = false)
     @Column(name = "victim_id", nullable = false)
     private long victimId;
-    @Basic(optional = false)
     @Column(name = "injury_id", nullable = false)
     private short injuryId;
 }

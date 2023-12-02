@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +27,6 @@ public class NibrsProperty implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "property_id", nullable = false)
     private Long propertyId;
     @Column(name = "stolen_count")
@@ -37,9 +37,11 @@ public class NibrsProperty implements Serializable {
     private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
     private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
+    @JsonBackReference
     @JoinColumn(name = "prop_loss_id", referencedColumnName = "prop_loss_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsPropLossType propLossId;

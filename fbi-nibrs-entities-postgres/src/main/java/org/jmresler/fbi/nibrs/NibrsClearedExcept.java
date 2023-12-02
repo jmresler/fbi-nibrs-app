@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,7 +25,6 @@ public class NibrsClearedExcept implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "cleared_except_id", nullable = false)
     private Short clearedExceptId;
     @Column(name = "cleared_except_code")
@@ -33,6 +33,7 @@ public class NibrsClearedExcept implements Serializable {
     private String clearedExceptName;
     @Column(name = "cleared_except_desc", length = 300)
     private String clearedExceptDesc;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clearedExceptId")
     private Collection<NibrsIncident> nibrsIncidentCollection;
 }

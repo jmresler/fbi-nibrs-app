@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -34,9 +35,11 @@ public class NibrsPropertyDesc implements Serializable {
     private Date dateRecovered;
     @Column(name = "nibrs_prop_desc_id")
     private BigInteger nibrsPropDescId;
+    @JsonBackReference
     @JoinColumn(name = "prop_desc_id", referencedColumnName = "prop_desc_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsPropDescType nibrsPropDescType;
+    @JsonBackReference
     @JoinColumn(name = "property_id", referencedColumnName = "property_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsProperty nibrsProperty;

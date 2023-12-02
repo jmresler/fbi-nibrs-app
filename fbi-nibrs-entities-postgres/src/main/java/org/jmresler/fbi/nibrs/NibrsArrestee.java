@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,7 +32,6 @@ public class NibrsArrestee implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
-    @Basic(optional = false)
     @Column(name = "arrestee_id", nullable = false)
     private Long arresteeId;
     @Column(name = "arrestee_seq_num")
@@ -54,24 +55,31 @@ public class NibrsArrestee implements Serializable {
     private Short ageRangeLowNum;
     @Column(name = "age_range_high_num")
     private Short ageRangeHighNum;
+    @JsonBackReference
     @JoinColumn(name = "age_id", referencedColumnName = "age_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsAge ageId;
+    @JsonBackReference
     @JoinColumn(name = "arrest_type_id", referencedColumnName = "arrest_type_id")
     @ManyToOne
     private NibrsArrestType arrestTypeId;
+    @JsonBackReference
     @JoinColumn(name = "ethnicity_id", referencedColumnName = "ethnicity_id")
     @ManyToOne
     private NibrsEthnicity ethnicityId;
+    @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
+    @JsonBackReference
     @JoinColumn(name = "offense_code", referencedColumnName = "offense_code", nullable = false)
     @ManyToOne(optional = false)
     private NibrsOffenseType offenseCode;
+    @JsonBackReference
     @JoinColumn(name = "race_id", referencedColumnName = "race_id", nullable = false)
     @ManyToOne(optional = false)
     private RefRace raceId;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsArrestee")
     private Collection<NibrsArresteeWeapon> nibrsArresteeWeaponCollection;
 }

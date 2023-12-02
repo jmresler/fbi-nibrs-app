@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,13 +22,13 @@ public class NibrsDrugMeasureType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "drug_measure_type_id", nullable = false)
     private Short drugMeasureTypeId;
     @Column(name = "drug_measure_code", length = 2)
     private String drugMeasureCode;
     @Column(name = "drug_measure_name", length = 100)
     private String drugMeasureName;
+    @JsonManagedReference
     @OneToMany(mappedBy = "drugMeasureTypeId")
     private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
 }

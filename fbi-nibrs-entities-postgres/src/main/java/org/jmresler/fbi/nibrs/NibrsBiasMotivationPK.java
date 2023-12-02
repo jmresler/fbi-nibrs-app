@@ -14,10 +14,8 @@ import lombok.Data;
 @Embeddable
 public class NibrsBiasMotivationPK implements Serializable {
 
-    @Basic(optional = false)
     @Column(name = "bias_id", nullable = false)
     private short biasId;
-    @Basic(optional = false)
     @Column(name = "offense_id", nullable = false)
     private long offenseId;
 }

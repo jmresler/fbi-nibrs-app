@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,10 +25,15 @@ public class NibrsBiasMotivation implements Serializable {
     protected NibrsBiasMotivationPK nibrsBiasMotivationPK;
     @Column(name = "data_year")
     private Integer dataYear;
+    @JsonBackReference
     @JoinColumn(name = "bias_id", referencedColumnName = "bias_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsBiasList nibrsBiasList;
+    @JsonBackReference
     @JoinColumn(name = "offense_id", referencedColumnName = "offense_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsOffense nibrsOffense;
+
+
+
 }

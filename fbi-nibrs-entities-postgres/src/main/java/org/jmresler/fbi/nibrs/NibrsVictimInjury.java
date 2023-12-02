@@ -1,5 +1,6 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,9 +24,11 @@ public class NibrsVictimInjury implements Serializable {
     protected NibrsVictimInjuryPK nibrsVictimInjuryPK;
     @Column(name = "data_year")
     private Integer dataYear;
+    @JsonBackReference
     @JoinColumn(name = "injury_id", referencedColumnName = "injury_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsInjury nibrsInjury;
+    @JsonBackReference
     @JoinColumn(name = "victim_id", referencedColumnName = "victim_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsVictim nibrsVictim;
