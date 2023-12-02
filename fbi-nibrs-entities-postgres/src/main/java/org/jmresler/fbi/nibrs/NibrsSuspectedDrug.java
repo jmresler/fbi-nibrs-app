@@ -1,21 +1,18 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_suspected_drug", catalog = "nibrs", schema = "public")
 public class NibrsSuspectedDrug implements Serializable {
@@ -26,6 +23,7 @@ public class NibrsSuspectedDrug implements Serializable {
     @Column(name = "est_drug_qty", precision = 17)
     private Double estDrugQty;
     @Id
+    @Basic(optional = false)
     @Column(name = "nibrs_suspected_drug_id", nullable = false)
     private Long nibrsSuspectedDrugId;
     @JsonBackReference
@@ -40,4 +38,17 @@ public class NibrsSuspectedDrug implements Serializable {
     @JoinColumn(name = "suspected_drug_type_id", referencedColumnName = "suspected_drug_type_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsSuspectedDrugType suspectedDrugTypeId;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsSuspectedDrug{");
+        sb.append("dataYear=").append(dataYear);
+        sb.append(", drugMeasureTypeId=").append(drugMeasureTypeId);
+        sb.append(", estDrugQty=").append(estDrugQty);
+        sb.append(", nibrsSuspectedDrugId=").append(nibrsSuspectedDrugId);
+        sb.append(", propertyId=").append(propertyId);
+        sb.append(", suspectedDrugTypeId=").append(suspectedDrugTypeId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

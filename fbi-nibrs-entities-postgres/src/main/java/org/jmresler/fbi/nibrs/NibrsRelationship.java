@@ -1,28 +1,26 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_relationship", catalog = "nibrs", schema = "public")
 public class NibrsRelationship implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "relationship_id", nullable = false)
     private Short relationshipId;
     @Column(name = "relationship_code", length = 2)
@@ -31,5 +29,15 @@ public class NibrsRelationship implements Serializable {
     private String relationshipName;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "relationshipId")
-    private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
+    private List<NibrsVictimOffenderRel> nibrsVictimOffenderRelList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsRelationship{");
+        sb.append("relationshipCode='").append(relationshipCode).append('\'');
+        sb.append(", relationshipId=").append(relationshipId);
+        sb.append(", relationshipName='").append(relationshipName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

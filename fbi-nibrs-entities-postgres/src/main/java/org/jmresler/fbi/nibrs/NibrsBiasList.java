@@ -1,28 +1,26 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_bias_list", catalog = "nibrs", schema = "public")
 public class NibrsBiasList implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "bias_id", nullable = false)
     private Short biasId;
     @Column(name = "bias_code", length = 2)
@@ -33,6 +31,16 @@ public class NibrsBiasList implements Serializable {
     private String biasDesc;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsBiasList")
-    private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    private List<NibrsBiasMotivation> nibrsBiasMotivationList;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsBiasList{");
+        sb.append("biasCode='").append(biasCode).append('\'');
+        sb.append(", biasDesc='").append(biasDesc).append('\'');
+        sb.append(", biasId=").append(biasId);
+        sb.append(", biasName='").append(biasName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

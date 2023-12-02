@@ -1,32 +1,32 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "ref_race", catalog = "nibrs", schema = "public")
 public class RefRace implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "race_id", nullable = false)
     private Short raceId;
+    @Basic(optional = false)
     @Column(name = "race_code", nullable = false, length = 2)
     private String raceCode;
+    @Basic(optional = false)
     @Column(name = "race_desc", nullable = false, length = 100)
     private String raceDesc;
     @Column(name = "sort_order")
@@ -39,11 +39,25 @@ public class RefRace implements Serializable {
     private String notes;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "raceId")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @JsonManagedReference
     @OneToMany(mappedBy = "raceId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @JsonManagedReference
     @OneToMany(mappedBy = "raceId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("RefRace{");
+        sb.append("endYear=").append(endYear);
+        sb.append(", notes='").append(notes).append('\'');
+        sb.append(", raceCode='").append(raceCode).append('\'');
+        sb.append(", raceDesc='").append(raceDesc).append('\'');
+        sb.append(", raceId=").append(raceId);
+        sb.append(", sortOrder=").append(sortOrder);
+        sb.append(", startYear=").append(startYear);
+        sb.append('}');
+        return sb.toString();
+    }
 }

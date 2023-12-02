@@ -1,17 +1,10 @@
 package org.jmresler.fbi.nibrs;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.io.Serializable;
+import jakarta.persistence.*;
 import lombok.Data;
 
-/**
- *
- * @author johnm
- */
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "ref_state", catalog = "nibrs", schema = "public")
@@ -19,8 +12,10 @@ public class RefState implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "state_id", nullable = false)
     private Short stateId;
+    @Basic(optional = false)
     @Column(name = "division_id", nullable = false)
     private short divisionId;
     @Column(name = "state_name", length = 100)
@@ -37,4 +32,6 @@ public class RefState implements Serializable {
     private Short statePubFreqMonths;
     @Column(name = "change_user", length = 100)
     private String changeUser;
+
+
 }

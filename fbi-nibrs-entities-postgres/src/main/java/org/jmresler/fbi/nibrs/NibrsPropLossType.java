@@ -1,28 +1,26 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_prop_loss_type", catalog = "nibrs", schema = "public")
 public class NibrsPropLossType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "prop_loss_id", nullable = false)
     private Short propLossId;
     @Column(name = "prop_loss_name", length = 100)
@@ -31,5 +29,15 @@ public class NibrsPropLossType implements Serializable {
     private String propLossDesc;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propLossId")
-    private Collection<NibrsProperty> nibrsPropertyCollection;
+    private List<NibrsProperty> nibrsPropertyList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsPropLossType{");
+        sb.append("propLossDesc='").append(propLossDesc).append('\'');
+        sb.append(", propLossId=").append(propLossId);
+        sb.append(", propLossName='").append(propLossName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

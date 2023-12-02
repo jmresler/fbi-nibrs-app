@@ -1,20 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_suspect_using", catalog = "nibrs", schema = "public")
 public class NibrsSuspectUsing implements Serializable {
@@ -32,4 +29,15 @@ public class NibrsSuspectUsing implements Serializable {
     @JoinColumn(name = "suspect_using_id", referencedColumnName = "suspect_using_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsUsingList nibrsUsingList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsSuspectUsing{");
+        sb.append("dataYear=").append(dataYear);
+        sb.append(", nibrsOffense=").append(nibrsOffense);
+        sb.append(", nibrsSuspectUsingPK=").append(nibrsSuspectUsingPK);
+        sb.append(", nibrsUsingList=").append(nibrsUsingList);
+        sb.append('}');
+        return sb.toString();
+    }
 }

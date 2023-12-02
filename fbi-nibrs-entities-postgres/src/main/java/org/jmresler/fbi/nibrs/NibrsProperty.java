@@ -1,24 +1,20 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_property", catalog = "nibrs", schema = "public")
 public class NibrsProperty implements Serializable {
@@ -27,16 +23,19 @@ public class NibrsProperty implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
+    @Basic(optional = false)
     @Column(name = "property_id", nullable = false)
     private Long propertyId;
     @Column(name = "stolen_count")
     private Short stolenCount;
     @Column(name = "recovered_count")
     private Short recoveredCount;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsProperty")
-    private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
+    private List<NibrsPropertyDesc> nibrsPropertyDescList;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
-    private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
     @JsonBackReference
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
@@ -45,4 +44,17 @@ public class NibrsProperty implements Serializable {
     @JoinColumn(name = "prop_loss_id", referencedColumnName = "prop_loss_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsPropLossType propLossId;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsProperty{");
+        sb.append("dataYear=").append(dataYear);
+        sb.append(", incidentId=").append(incidentId);
+        sb.append(", propertyId=").append(propertyId);
+        sb.append(", propLossId=").append(propLossId);
+        sb.append(", recoveredCount=").append(recoveredCount);
+        sb.append(", stolenCount=").append(stolenCount);
+        sb.append('}');
+        return sb.toString();
+    }
 }

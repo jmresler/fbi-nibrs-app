@@ -1,20 +1,18 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_victim_injury", catalog = "nibrs", schema = "public")
 public class NibrsVictimInjury implements Serializable {
@@ -32,4 +30,15 @@ public class NibrsVictimInjury implements Serializable {
     @JoinColumn(name = "victim_id", referencedColumnName = "victim_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsVictim nibrsVictim;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsVictimInjury{");
+        sb.append("dataYear=").append(dataYear);
+        sb.append(", nibrsInjury=").append(nibrsInjury);
+        sb.append(", nibrsVictim=").append(nibrsVictim);
+        sb.append(", nibrsVictimInjuryPK=").append(nibrsVictimInjuryPK);
+        sb.append('}');
+        return sb.toString();
+    }
 }

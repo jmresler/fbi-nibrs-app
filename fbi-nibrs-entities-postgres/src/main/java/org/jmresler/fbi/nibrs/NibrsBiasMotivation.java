@@ -1,21 +1,18 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_bias_motivation", catalog = "nibrs", schema = "public")
 public class NibrsBiasMotivation implements Serializable {
@@ -34,6 +31,14 @@ public class NibrsBiasMotivation implements Serializable {
     @ManyToOne(optional = false)
     private NibrsOffense nibrsOffense;
 
-
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsBiasMotivation{");
+        sb.append("dataYear=").append(dataYear);
+        sb.append(", nibrsBiasList=").append(nibrsBiasList);
+        sb.append(", nibrsBiasMotivationPK=").append(nibrsBiasMotivationPK);
+        sb.append(", nibrsOffense=").append(nibrsOffense);
+        sb.append('}');
+        return sb.toString();
+    }
 }

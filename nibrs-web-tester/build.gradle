@@ -105,7 +105,7 @@ clean {
 
 dependencies {
 
-	implementation project(':fbi-nibrs-entities-mysql')
+	implementation project(':fbi-nibrs-entities-postgres')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer'

@@ -1,28 +1,26 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_suspected_drug_type", catalog = "nibrs", schema = "public")
 public class NibrsSuspectedDrugType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "suspected_drug_type_id", nullable = false)
     private Short suspectedDrugTypeId;
     @Column(name = "suspected_drug_code")
@@ -31,5 +29,15 @@ public class NibrsSuspectedDrugType implements Serializable {
     private String suspectedDrugName;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "suspectedDrugTypeId")
-    private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsSuspectedDrugType{");
+        sb.append("suspectedDrugCode=").append(suspectedDrugCode);
+        sb.append(", suspectedDrugName='").append(suspectedDrugName).append('\'');
+        sb.append(", suspectedDrugTypeId=").append(suspectedDrugTypeId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

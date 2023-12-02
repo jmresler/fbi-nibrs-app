@@ -2,22 +2,26 @@ package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import java.util.List;
 
-/**
- *
- * @author johnm
- */
-@Data
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_offense_type", catalog = "nibrs", schema = "public")
 public class NibrsOffenseType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "offense_code", nullable = false, length = 5)
     private String offenseCode;
     @Column(name = "offense_name", length = 100)
@@ -36,8 +40,24 @@ public class NibrsOffenseType implements Serializable {
     private String offenseGroup;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode", fetch = FetchType.LAZY)
-    private Collection<NibrsOffense> nibrsOffenseCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offenseCode")
+    private List<NibrsOffense> nibrsOffenseList;
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsOffenseType{");
+        sb.append("crimeAgainst='").append(crimeAgainst).append('\'');
+        sb.append(", ctFlag=").append(ctFlag);
+        sb.append(", hcCode='").append(hcCode).append('\'');
+        sb.append(", hcFlag=").append(hcFlag);
+        sb.append(", offenseCategoryName='").append(offenseCategoryName).append('\'');
+        sb.append(", offenseCode='").append(offenseCode).append('\'');
+        sb.append(", offenseGroup='").append(offenseGroup).append('\'');
+        sb.append(", offenseName='").append(offenseName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -2,24 +2,19 @@ package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_offense", catalog = "nibrs", schema = "public")
 public class NibrsOffense implements Serializable {
@@ -28,6 +23,7 @@ public class NibrsOffense implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
+    @Basic(optional = false)
     @Column(name = "offense_id", nullable = false)
     private Long offenseId;
     @Column(name = "attempt_complete_flag")
@@ -50,17 +46,32 @@ public class NibrsOffense implements Serializable {
     private NibrsOffenseType offenseCode;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    private List<NibrsVictimOffense> nibrsVictimOffenseList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsWeapon> nibrsWeaponCollection;
+    private List<NibrsWeapon> nibrsWeaponList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+    private List<NibrsCriminalAct> nibrsCriminalActList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    private List<NibrsBiasMotivation> nibrsBiasMotivationList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsSuspectUsing> nibrsSuspectUsingCollection;
+    private List<NibrsSuspectUsing> nibrsSuspectUsingList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsOffense{");
+        sb.append("attemptCompleteFlag=").append(attemptCompleteFlag);
+        sb.append(", dataYear=").append(dataYear);
+        sb.append(", incidentId=").append(incidentId);
+        sb.append(", locationId=").append(locationId);
+        sb.append(", methodEntryCode=").append(methodEntryCode);
+        sb.append(", numPremisesEntered=").append(numPremisesEntered);
+        sb.append(", offenseCode=").append(offenseCode);
+        sb.append(", offenseId=").append(offenseId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

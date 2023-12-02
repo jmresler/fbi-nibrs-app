@@ -7,16 +7,16 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- *
- * @author johnm
- */
 @Data
 @Embeddable
 public class NibrsSuspectUsingPK implements Serializable {
 
+    @Basic(optional = false)
     @Column(name = "suspect_using_id", nullable = false)
     private short suspectUsingId;
+    @Basic(optional = false)
     @Column(name = "offense_id", nullable = false)
     private long offenseId;
+
+
 }

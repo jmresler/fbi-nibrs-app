@@ -2,24 +2,19 @@ package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_offender", catalog = "nibrs", schema = "public")
 public class NibrsOffender implements Serializable {
@@ -28,6 +23,7 @@ public class NibrsOffender implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
+    @Basic(optional = false)
     @Column(name = "offender_id", nullable = false)
     private Long offenderId;
     @Column(name = "offender_seq_num")
@@ -58,5 +54,23 @@ public class NibrsOffender implements Serializable {
     private RefRace raceId;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffender")
-    private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
+    private List<NibrsVictimOffenderRel> nibrsVictimOffenderRelList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsOffender{");
+        sb.append("ageId=").append(ageId);
+        sb.append(", ageNum='").append(ageNum).append('\'');
+        sb.append(", ageRangeHighNum=").append(ageRangeHighNum);
+        sb.append(", ageRangeLowNum=").append(ageRangeLowNum);
+        sb.append(", dataYear=").append(dataYear);
+        sb.append(", ethnicityId=").append(ethnicityId);
+        sb.append(", incidentId=").append(incidentId);
+        sb.append(", offenderId=").append(offenderId);
+        sb.append(", offenderSeqNum=").append(offenderSeqNum);
+        sb.append(", raceId=").append(raceId);
+        sb.append(", sexCode=").append(sexCode);
+        sb.append('}');
+        return sb.toString();
+    }
 }

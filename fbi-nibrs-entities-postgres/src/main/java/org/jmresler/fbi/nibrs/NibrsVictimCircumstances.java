@@ -1,19 +1,11 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.io.Serializable;
+import jakarta.persistence.*;
 import lombok.Data;
 
-/**
- *
- * @author johnm
- */
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "nibrs_victim_circumstances", catalog = "nibrs", schema = "public")
@@ -36,4 +28,6 @@ public class NibrsVictimCircumstances implements Serializable {
     @JoinColumn(name = "victim_id", referencedColumnName = "victim_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsVictim nibrsVictim;
+
+
 }

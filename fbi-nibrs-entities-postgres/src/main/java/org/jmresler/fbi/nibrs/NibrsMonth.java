@@ -1,43 +1,36 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_month", catalog = "nibrs", schema = "public")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "did")
 public class NibrsMonth implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
+    @Basic(optional = false)
     @Column(name = "did", nullable = false)
     private Long did;
     @Column(name = "data_year")
     private Integer dataYear;
+    @Basic(optional = false)
     @Column(name = "nibrs_month_id", nullable = false)
     private long nibrsMonthId;
+    @Basic(optional = false)
     @Column(name = "month_num", nullable = false)
     private short monthNum;
     @Column(name = "inc_data_year")
@@ -49,6 +42,7 @@ public class NibrsMonth implements Serializable {
     private Date reportDate;
     @Column(name = "update_flag")
     private Character updateFlag;
+    @Basic(optional = false)
     @Column(name = "orig_format", nullable = false)
     private Character origFormat;
     @Column(name = "data_home", length = 10)
@@ -63,5 +57,25 @@ public class NibrsMonth implements Serializable {
     private Agencies agencyId;
     @JsonManagedReference
     @OneToMany(mappedBy = "did")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsMonth{");
+        sb.append("agencyId=").append(agencyId);
+        sb.append(", dataHome='").append(dataHome).append('\'');
+        sb.append(", dataYear=").append(dataYear);
+        sb.append(", ddocname='").append(ddocname).append('\'');
+        sb.append(", did=").append(did);
+        sb.append(", incDataYear=").append(incDataYear);
+        sb.append(", monthNum=").append(monthNum);
+        sb.append(", monthPubStatus=").append(monthPubStatus);
+        sb.append(", nibrsMonthId=").append(nibrsMonthId);
+        sb.append(", origFormat=").append(origFormat);
+        sb.append(", reportDate=").append(reportDate);
+        sb.append(", reportedStatus='").append(reportedStatus).append('\'');
+        sb.append(", updateFlag=").append(updateFlag);
+        sb.append('}');
+        return sb.toString();
+    }
 }

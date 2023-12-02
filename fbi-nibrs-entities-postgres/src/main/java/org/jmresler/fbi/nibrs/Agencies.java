@@ -1,50 +1,32 @@
-/*
- * Copyright 2023 jmres.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import static jakarta.persistence.FetchType.EAGER;
-
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@RequiredArgsConstructor
 @Entity
-@Table(name = "agencies", schema = "public")
+@Table(name = "agencies", catalog = "nibrs", schema = "public")
 public class Agencies implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "agency_id", nullable = false)
-    private Integer agencyId;
     @Column(name = "yearly_agency_id")
     private Integer yearlyAgencyId;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "agency_id", nullable = false)
+    private Integer agencyId;
     @Column(name = "data_year")
     private Integer dataYear;
     @Column(name = "ori", length = 25)
@@ -166,10 +148,75 @@ public class Agencies implements Serializable {
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = EAGER)
-    private Collection<NibrsMonth> nibrsMonthCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    private List<NibrsMonth> nibrsMonthList;
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = EAGER)
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
+    private List<NibrsIncident> nibrsIncidentList;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Agencies{");
+        sb.append("agencyId=").append(agencyId);
+        sb.append(", agencyStatus='").append(agencyStatus).append('\'');
+        sb.append(", agencyTypeName='").append(agencyTypeName).append('\'');
+        sb.append(", countyName='").append(countyName).append('\'');
+        sb.append(", coveredByLegacyOri='").append(coveredByLegacyOri).append('\'');
+        sb.append(", coveredFlag='").append(coveredFlag).append('\'');
+        sb.append(", dataYear=").append(dataYear);
+        sb.append(", directContributorFlag='").append(directContributorFlag).append('\'');
+        sb.append(", divisionCode=").append(divisionCode);
+        sb.append(", divisionName='").append(divisionName).append('\'');
+        sb.append(", dormantFlag='").append(dormantFlag).append('\'');
+        sb.append(", dormantYear=").append(dormantYear);
+        sb.append(", employeeRate=").append(employeeRate);
+        sb.append(", femaleCivilian=").append(femaleCivilian);
+        sb.append(", femaleOfficer=").append(femaleOfficer);
+        sb.append(", femaleTotal=").append(femaleTotal);
+        sb.append(", legacyOri='").append(legacyOri).append('\'');
+        sb.append(", maleCivilian=").append(maleCivilian);
+        sb.append(", maleOfficer=").append(maleOfficer);
+        sb.append(", maleTotal=").append(maleTotal);
+        sb.append(", mipFlag='").append(mipFlag).append('\'');
+        sb.append(", msaName='").append(msaName).append('\'');
+        sb.append(", ncicAgencyName='").append(ncicAgencyName).append('\'');
+        sb.append(", nibrsCertDate=").append(nibrsCertDate);
+        sb.append(", nibrsCtStartDate=").append(nibrsCtStartDate);
+        sb.append(", nibrsLeokaStartDate=").append(nibrsLeokaStartDate);
+        sb.append(", nibrsMultiBiasStartDate=").append(nibrsMultiBiasStartDate);
+        sb.append(", nibrsOffEthStartDate=").append(nibrsOffEthStartDate);
+        sb.append(", nibrsParticipated='").append(nibrsParticipated).append('\'');
+        sb.append(", nibrsStartDate=").append(nibrsStartDate);
+        sb.append(", officerRate=").append(officerRate);
+        sb.append(", ori='").append(ori).append('\'');
+        sb.append(", parentPopGroupCode=").append(parentPopGroupCode);
+        sb.append(", parentPopGroupDesc='").append(parentPopGroupDesc).append('\'');
+        sb.append(", participated='").append(participated).append('\'');
+        sb.append(", peReportedFlag='").append(peReportedFlag).append('\'');
+        sb.append(", popSortOrder=").append(popSortOrder);
+        sb.append(", population=").append(population);
+        sb.append(", populationGroupCode='").append(populationGroupCode).append('\'');
+        sb.append(", populationGroupDesc='").append(populationGroupDesc).append('\'');
+        sb.append(", populationGroupId=").append(populationGroupId);
+        sb.append(", pubAgencyName='").append(pubAgencyName).append('\'');
+        sb.append(", pubAgencyUnit='").append(pubAgencyUnit).append('\'');
+        sb.append(", publishableFlag='").append(publishableFlag).append('\'');
+        sb.append(", regionCode=").append(regionCode);
+        sb.append(", regionDesc='").append(regionDesc).append('\'');
+        sb.append(", regionName='").append(regionName).append('\'');
+        sb.append(", reportingType='").append(reportingType).append('\'');
+        sb.append(", sai='").append(sai).append('\'');
+        sb.append(", stateAbbr='").append(stateAbbr).append('\'');
+        sb.append(", stateId=").append(stateId);
+        sb.append(", stateName='").append(stateName).append('\'');
+        sb.append(", statePostalAbbr='").append(statePostalAbbr).append('\'');
+        sb.append(", submittingAgencyId=").append(submittingAgencyId);
+        sb.append(", submittingAgencyName='").append(submittingAgencyName).append('\'');
+        sb.append(", suburbanAreaFlag='").append(suburbanAreaFlag).append('\'');
+        sb.append(", summaryRapeDef='").append(summaryRapeDef).append('\'');
+        sb.append(", ucrAgencyName='").append(ucrAgencyName).append('\'');
+        sb.append(", yearlyAgencyId=").append(yearlyAgencyId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

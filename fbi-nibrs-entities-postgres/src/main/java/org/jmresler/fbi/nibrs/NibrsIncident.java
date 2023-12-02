@@ -2,29 +2,20 @@ package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_incident", catalog = "nibrs", schema = "public")
 public class NibrsIncident implements Serializable {
@@ -33,8 +24,10 @@ public class NibrsIncident implements Serializable {
     @Column(name = "data_year")
     private Integer dataYear;
     @Id
+    @Basic(optional = false)
     @Column(name = "incident_id", nullable = false)
     private Long incidentId;
+    @Basic(optional = false)
     @Column(name = "nibrs_month_id", nullable = false)
     private long nibrsMonthId;
     @Column(name = "cargo_theft_flag")
@@ -60,10 +53,10 @@ public class NibrsIncident implements Serializable {
     private Character origFormat;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsOffense> nibrsOffenseCollection;
+    private List<NibrsOffense> nibrsOffenseList;
     @JsonBackReference
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
@@ -78,11 +71,34 @@ public class NibrsIncident implements Serializable {
     private NibrsMonth did;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsProperty> nibrsPropertyCollection;
+    private List<NibrsProperty> nibrsPropertyList;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsIncident{");
+        sb.append("agencyId=").append(agencyId);
+        sb.append(", cargoTheftFlag=").append(cargoTheftFlag);
+        sb.append(", clearedExceptDate=").append(clearedExceptDate);
+        sb.append(", clearedExceptId=").append(clearedExceptId);
+        sb.append(", dataHome=").append(dataHome);
+        sb.append(", dataYear=").append(dataYear);
+        sb.append(", did=").append(did);
+        sb.append(", incidentDate=").append(incidentDate);
+        sb.append(", incidentHour=").append(incidentHour);
+        sb.append(", incidentId=").append(incidentId);
+        sb.append(", incidentStatus='").append(incidentStatus).append('\'');
+        sb.append(", nibrsMonthId=").append(nibrsMonthId);
+        sb.append(", origFormat=").append(origFormat);
+        sb.append(", reportDateFlag=").append(reportDateFlag);
+        sb.append(", submissionDate=").append(submissionDate);
+        sb.append('}');
+        return sb.toString();
+    }
 }

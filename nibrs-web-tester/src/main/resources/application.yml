@@ -1,7 +1,7 @@
 logging:
   level:
     root: warn
-    '[org.jmresler.fbi.nibrs.web]': debug
+    '[org.jmresler.fbi.nibrs]': debug
   file:
     name: logs/${spring.application.name}.log
 
@@ -11,14 +11,16 @@ server:
 
 spring:
   application:
-    name: web-tester
+    name: web
   datasource:
     driver-class-name: org.postgresql.Driver
     name: jmres
     password: jmlawb36
     url: jdbc:postgresql://localhost:5432/nibrs
   jpa:
-    database: postgresql
-    show-sql: true
     open-in-view: true
-    generate-ddl: false
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true

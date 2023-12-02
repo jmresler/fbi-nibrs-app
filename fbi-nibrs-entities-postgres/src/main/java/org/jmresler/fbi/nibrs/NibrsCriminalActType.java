@@ -1,30 +1,26 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.util.Collection;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author johnm
- */
-@Data
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "nibrs_criminal_act_type", catalog = "nibrs", schema = "public")
 public class NibrsCriminalActType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "criminal_act_id", nullable = false)
     private Short criminalActId;
     @Column(name = "criminal_act_code")
@@ -35,5 +31,16 @@ public class NibrsCriminalActType implements Serializable {
     private String criminalActDesc;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCriminalActType")
-    private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+    private List<NibrsCriminalAct> nibrsCriminalActList;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NibrsCriminalActType{");
+        sb.append("criminalActCode=").append(criminalActCode);
+        sb.append(", criminalActDesc='").append(criminalActDesc).append('\'');
+        sb.append(", criminalActId=").append(criminalActId);
+        sb.append(", criminalActName='").append(criminalActName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
