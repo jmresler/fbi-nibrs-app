@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_assignment_type", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "assignmentTypeId")
 public class NibrsAssignmentType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,17 +23,6 @@ public class NibrsAssignmentType implements Serializable {
     private Character assignmentTypeCode;
     @Column(name = "assignment_type_name", length = 100)
     private String assignmentTypeName;
-    @JsonManagedReference
     @OneToMany(mappedBy = "assignmentTypeId")
     private List<NibrsVictim> nibrsVictimList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsAssignmentType{");
-        sb.append("assignmentTypeCode=").append(assignmentTypeCode);
-        sb.append(", assignmentTypeId=").append(assignmentTypeId);
-        sb.append(", assignmentTypeName='").append(assignmentTypeName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

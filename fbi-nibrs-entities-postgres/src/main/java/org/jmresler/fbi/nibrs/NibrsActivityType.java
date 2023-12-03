@@ -1,22 +1,18 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_activity_type", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "activityTypeId")
 public class NibrsActivityType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,18 +24,6 @@ public class NibrsActivityType implements Serializable {
     private String activityTypeCode;
     @Column(name = "activity_type_name", length = 100)
     private String activityTypeName;
-    @JsonManagedReference
     @OneToMany(mappedBy = "activityTypeId")
     private List<NibrsVictim> nibrsVictimList;
-
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsActivityType{");
-        sb.append("activityTypeCode='").append(activityTypeCode).append('\'');
-        sb.append(", activityTypeId=").append(activityTypeId);
-        sb.append(", activityTypeName='").append(activityTypeName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

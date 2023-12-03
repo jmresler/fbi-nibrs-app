@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_justifiable_force", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "justifiableForceId")
 public class NibrsJustifiableForce implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,17 +23,6 @@ public class NibrsJustifiableForce implements Serializable {
     private Character justifiableForceCode;
     @Column(name = "justifiable_force_name", length = 100)
     private String justifiableForceName;
-    @JsonManagedReference
     @OneToMany(mappedBy = "justifiableForceId")
     private List<NibrsVictimCircumstances> nibrsVictimCircumstancesList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsJustifiableForce{");
-        sb.append("justifiableForceCode=").append(justifiableForceCode);
-        sb.append(", justifiableForceId=").append(justifiableForceId);
-        sb.append(", justifiableForceName='").append(justifiableForceName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

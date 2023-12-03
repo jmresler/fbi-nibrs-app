@@ -1,20 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_circumstances", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "circumstancesId")
 public class NibrsCircumstances implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,15 +27,4 @@ public class NibrsCircumstances implements Serializable {
     private String circumstancesName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCircumstances")
     private List<NibrsVictimCircumstances> nibrsVictimCircumstancesList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsCircumstances{");
-        sb.append("circumstancesCode=").append(circumstancesCode);
-        sb.append(", circumstancesId=").append(circumstancesId);
-        sb.append(", circumstancesName='").append(circumstancesName).append('\'');
-        sb.append(", circumstancesType=").append(circumstancesType);
-        sb.append('}');
-        return sb.toString();
-    }
 }

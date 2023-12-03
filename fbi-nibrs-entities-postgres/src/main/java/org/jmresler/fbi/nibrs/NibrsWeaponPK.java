@@ -18,5 +18,4 @@ public class NibrsWeaponPK implements Serializable {
     @Column(name = "offense_id", nullable = false)
     private long offenseId;
 
-
 }

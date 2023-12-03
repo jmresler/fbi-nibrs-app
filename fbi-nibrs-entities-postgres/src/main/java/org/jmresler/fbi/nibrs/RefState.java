@@ -1,5 +1,7 @@
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +10,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "ref_state", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "stateId")
 public class RefState implements Serializable {
 
     private static final long serialVersionUID = 1L;

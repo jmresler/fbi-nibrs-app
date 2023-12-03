@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_weapon_type", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "weaponId")
 public class NibrsWeaponType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,21 +25,8 @@ public class NibrsWeaponType implements Serializable {
     private String weaponName;
     @Column(name = "shr_flag")
     private Character shrFlag;
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsWeaponType")
     private List<NibrsArresteeWeapon> nibrsArresteeWeaponList;
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsWeaponType")
     private List<NibrsWeapon> nibrsWeaponList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsWeaponType{");
-        sb.append("shrFlag=").append(shrFlag);
-        sb.append(", weaponCode='").append(weaponCode).append('\'');
-        sb.append(", weaponId=").append(weaponId);
-        sb.append(", weaponName='").append(weaponName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

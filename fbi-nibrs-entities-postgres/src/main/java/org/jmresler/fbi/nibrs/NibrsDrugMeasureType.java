@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_drug_measure_type", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "drugMeasureTypeId")
 public class NibrsDrugMeasureType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,17 +23,6 @@ public class NibrsDrugMeasureType implements Serializable {
     private String drugMeasureCode;
     @Column(name = "drug_measure_name", length = 100)
     private String drugMeasureName;
-    @JsonManagedReference
     @OneToMany(mappedBy = "drugMeasureTypeId")
     private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsDrugMeasureType{");
-        sb.append("drugMeasureCode='").append(drugMeasureCode).append('\'');
-        sb.append(", drugMeasureName='").append(drugMeasureName).append('\'');
-        sb.append(", drugMeasureTypeId=").append(drugMeasureTypeId);
-        sb.append('}');
-        return sb.toString();
-    }
 }

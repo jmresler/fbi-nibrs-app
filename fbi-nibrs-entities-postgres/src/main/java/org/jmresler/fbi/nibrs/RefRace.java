@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "ref_race", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "raceId")
 public class RefRace implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,27 +33,11 @@ public class RefRace implements Serializable {
     private Short endYear;
     @Column(name = "notes", length = 1000)
     private String notes;
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "raceId")
     private List<NibrsArrestee> nibrsArresteeList;
-    @JsonManagedReference
     @OneToMany(mappedBy = "raceId")
     private List<NibrsOffender> nibrsOffenderList;
-    @JsonManagedReference
     @OneToMany(mappedBy = "raceId")
     private List<NibrsVictim> nibrsVictimList;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("RefRace{");
-        sb.append("endYear=").append(endYear);
-        sb.append(", notes='").append(notes).append('\'');
-        sb.append(", raceCode='").append(raceCode).append('\'');
-        sb.append(", raceDesc='").append(raceDesc).append('\'');
-        sb.append(", raceId=").append(raceId);
-        sb.append(", sortOrder=").append(sortOrder);
-        sb.append(", startYear=").append(startYear);
-        sb.append('}');
-        return sb.toString();
-    }
 }

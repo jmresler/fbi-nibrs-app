@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_criminal_act_type", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "criminalActId")
 public class NibrsCriminalActType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,18 +25,7 @@ public class NibrsCriminalActType implements Serializable {
     private String criminalActName;
     @Column(name = "criminal_act_desc", length = 300)
     private String criminalActDesc;
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCriminalActType")
     private List<NibrsCriminalAct> nibrsCriminalActList;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsCriminalActType{");
-        sb.append("criminalActCode=").append(criminalActCode);
-        sb.append(", criminalActDesc='").append(criminalActDesc).append('\'');
-        sb.append(", criminalActId=").append(criminalActId);
-        sb.append(", criminalActName='").append(criminalActName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

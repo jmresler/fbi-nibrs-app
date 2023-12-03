@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_arrestee_weapon", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nibrsArresteeWeaponPK")
 public class NibrsArresteeWeapon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,25 +21,10 @@ public class NibrsArresteeWeapon implements Serializable {
     private Integer dataYear;
     @Column(name = "nibrs_arrestee_weapon_id")
     private BigInteger nibrsArresteeWeaponId;
-    @JsonBackReference
     @JoinColumn(name = "arrestee_id", referencedColumnName = "arrestee_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsArrestee nibrsArrestee;
-    @JsonBackReference
     @JoinColumn(name = "weapon_id", referencedColumnName = "weapon_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsWeaponType nibrsWeaponType;
-
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsArresteeWeapon{");
-        sb.append("dataYear=").append(dataYear);
-        sb.append(", nibrsArrestee=").append(nibrsArrestee);
-        sb.append(", nibrsArresteeWeaponId=").append(nibrsArresteeWeaponId);
-        sb.append(", nibrsArresteeWeaponPK=").append(nibrsArresteeWeaponPK);
-        sb.append(", nibrsWeaponType=").append(nibrsWeaponType);
-        sb.append('}');
-        return sb.toString();
-    }
 }

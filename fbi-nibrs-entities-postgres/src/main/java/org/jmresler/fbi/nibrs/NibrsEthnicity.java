@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_ethnicity", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "ethnicityId")
 public class NibrsEthnicity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,23 +23,10 @@ public class NibrsEthnicity implements Serializable {
     private Character ethnicityCode;
     @Column(name = "ethnicity_name", length = 100)
     private String ethnicityName;
-    @JsonManagedReference
     @OneToMany(mappedBy = "ethnicityId")
     private List<NibrsArrestee> nibrsArresteeList;
-    @JsonManagedReference
     @OneToMany(mappedBy = "ethnicityId")
     private List<NibrsOffender> nibrsOffenderList;
-    @JsonManagedReference
     @OneToMany(mappedBy = "ethnicityId")
     private List<NibrsVictim> nibrsVictimList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsEthnicity{");
-        sb.append("ethnicityCode=").append(ethnicityCode);
-        sb.append(", ethnicityId=").append(ethnicityId);
-        sb.append(", ethnicityName='").append(ethnicityName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

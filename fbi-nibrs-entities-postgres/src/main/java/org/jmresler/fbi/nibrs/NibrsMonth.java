@@ -1,23 +1,18 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_month", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "did")
 public class NibrsMonth implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,31 +46,10 @@ public class NibrsMonth implements Serializable {
     private String ddocname;
     @Column(name = "month_pub_status")
     private Integer monthPubStatus;
-    @JsonBackReference
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
     private Agencies agencyId;
-    @JsonManagedReference
     @OneToMany(mappedBy = "did")
     private List<NibrsIncident> nibrsIncidentList;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsMonth{");
-        sb.append("agencyId=").append(agencyId);
-        sb.append(", dataHome='").append(dataHome).append('\'');
-        sb.append(", dataYear=").append(dataYear);
-        sb.append(", ddocname='").append(ddocname).append('\'');
-        sb.append(", did=").append(did);
-        sb.append(", incDataYear=").append(incDataYear);
-        sb.append(", monthNum=").append(monthNum);
-        sb.append(", monthPubStatus=").append(monthPubStatus);
-        sb.append(", nibrsMonthId=").append(nibrsMonthId);
-        sb.append(", origFormat=").append(origFormat);
-        sb.append(", reportDate=").append(reportDate);
-        sb.append(", reportedStatus='").append(reportedStatus).append('\'');
-        sb.append(", updateFlag=").append(updateFlag);
-        sb.append('}');
-        return sb.toString();
-    }
 }

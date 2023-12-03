@@ -1,21 +1,17 @@
 package org.jmresler.fbi.nibrs;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "nibrs_cleared_except", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "clearedExceptId")
 public class NibrsClearedExcept implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,18 +25,6 @@ public class NibrsClearedExcept implements Serializable {
     private String clearedExceptName;
     @Column(name = "cleared_except_desc", length = 300)
     private String clearedExceptDesc;
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clearedExceptId")
     private List<NibrsIncident> nibrsIncidentList;
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NibrsClearedExcept{");
-        sb.append("clearedExceptCode=").append(clearedExceptCode);
-        sb.append(", clearedExceptDesc='").append(clearedExceptDesc).append('\'');
-        sb.append(", clearedExceptId=").append(clearedExceptId);
-        sb.append(", clearedExceptName='").append(clearedExceptName).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }
