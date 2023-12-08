@@ -35,11 +35,11 @@ public class NibrsProperty implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "data_year")
-    private Integer dataYear;
     @Id
     @Column(name = "property_id", nullable = false)
     private Long propertyId;
+    @Column(name = "data_year")
+    private Integer dataYear;
     @Column(name = "stolen_count")
     private Short stolenCount;
     @Column(name = "recovered_count")
@@ -54,4 +54,10 @@ public class NibrsProperty implements Serializable {
     @JoinColumn(name = "prop_loss_id", referencedColumnName = "prop_loss_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsPropLossType propLossId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsProperty[" + propertyId + "]";
+    }
+
 }

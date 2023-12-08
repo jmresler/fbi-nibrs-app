@@ -34,4 +34,10 @@ public class NibrsWeaponPK implements Serializable {
     private short weaponId;
     @Column(name = "offense_id", nullable = false)
     private long offenseId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsWeaponPK[" + weaponId + ", " + offenseId + "]";
+    }
+
 }

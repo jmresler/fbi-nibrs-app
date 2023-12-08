@@ -22,11 +22,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
 @Data
 @Entity
 @Table(name = "nibrs_activity_type")
@@ -44,4 +39,9 @@ public class NibrsActivityType implements Serializable {
     private String activityTypeName;
     @OneToMany(mappedBy = "activityTypeId")
     private Collection<NibrsVictim> nibrsVictimCollection;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsActivityType[" + activityTypeId + "]";
+    }
 }

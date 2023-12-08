@@ -47,5 +47,10 @@ public class NibrsBiasList implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsBiasList")
     private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsBiasList[" + biasId + "]";
+    }
+
 
 }

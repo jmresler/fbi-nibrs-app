@@ -46,4 +46,10 @@ public class NibrsCircumstances implements Serializable {
     private String circumstancesName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCircumstances")
     private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsCircumstances[" + circumstancesId + "]";
+    }
+
 }

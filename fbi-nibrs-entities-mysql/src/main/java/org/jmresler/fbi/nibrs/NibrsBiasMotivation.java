@@ -45,4 +45,9 @@ public class NibrsBiasMotivation implements Serializable {
     @ManyToOne(optional = false)
     private NibrsOffense nibrsOffense;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsBiasMotivation[...]";
+    }
+
 }

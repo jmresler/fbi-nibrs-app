@@ -45,4 +45,10 @@ public class NibrsInjury implements Serializable {
     private String injuryName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsInjury")
     private Collection<NibrsVictimInjury> nibrsVictimInjuryCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsInjury[" + injuryId + "]";
+    }
+
 }

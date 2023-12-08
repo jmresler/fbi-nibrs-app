@@ -53,4 +53,10 @@ public class NibrsPropertyDesc implements Serializable {
     @JoinColumn(name = "property_id", referencedColumnName = "property_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsProperty nibrsProperty;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsPropertyDesc[...]";
+    }
+
 }

@@ -35,11 +35,11 @@ public class NibrsOffense implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "data_year")
-    private Integer dataYear;
     @Id
     @Column(name = "offense_id", nullable = false)
     private Long offenseId;
+    @Column(name = "data_year")
+    private Integer dataYear;
     @Column(name = "attempt_complete_flag")
     private Character attemptCompleteFlag;
     @Column(name = "num_premises_entered")
@@ -65,4 +65,10 @@ public class NibrsOffense implements Serializable {
     private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
     private Collection<NibrsSuspectUsing> nibrsSuspectUsingCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsOffense[" + offenseId + "]";
+    }
+
 }

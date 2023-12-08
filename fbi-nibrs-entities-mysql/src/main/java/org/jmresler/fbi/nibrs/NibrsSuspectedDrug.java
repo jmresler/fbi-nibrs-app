@@ -50,4 +50,10 @@ public class NibrsSuspectedDrug implements Serializable {
     @JoinColumn(name = "suspected_drug_type_id", referencedColumnName = "suspected_drug_type_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsSuspectedDrugType suspectedDrugTypeId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsSuspectedDrug[" + nibrsSuspectedDrugId + "]";
+    }
+
 }

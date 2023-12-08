@@ -84,4 +84,10 @@ public class NibrsArrestee implements Serializable {
     private RefRace raceId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsArrestee")
     private Collection<NibrsArresteeWeapon> nibrsArresteeWeaponCollection;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsArrestee[" + arresteeId + "]";
+    }
+
 }

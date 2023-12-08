@@ -44,4 +44,10 @@ public class NibrsJustifiableForce implements Serializable {
     private String justifiableForceName;
     @OneToMany(mappedBy = "justifiableForceId")
     private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsJustifiableForce[" + justifiableForceId + "]";
+    }
+
 }

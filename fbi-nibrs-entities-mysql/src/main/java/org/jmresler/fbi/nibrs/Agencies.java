@@ -25,9 +25,9 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- *
- * @author John M. Resler
- * @version 1.0.0
+ * The Agencies class represents a database entity that stores information about law enforcement agencies.
+ * This class is annotated with @Data, @Entity, and @Table annotations to configure its behavior as a
+ * persistent entity in the database.
  */
 @Data
 @Entity
@@ -166,4 +166,9 @@ public class Agencies implements Serializable {
     private Collection<NibrsMonth> nibrsMonthCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
     private Collection<NibrsIncident> nibrsIncidentCollection;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.Agencies[" + agencyId + "]";
+    }
 }

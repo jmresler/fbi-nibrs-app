@@ -45,4 +45,10 @@ public class NibrsAssignmentType implements Serializable {
     @OneToMany(mappedBy = "assignmentTypeId")
     private Collection<NibrsVictim> nibrsVictimCollection;
 
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsAssignmentType[" + assignmentTypeId + ", " + assignmentTypeCode + ", " + assignmentTypeCode + "]";
+    }
+
 }

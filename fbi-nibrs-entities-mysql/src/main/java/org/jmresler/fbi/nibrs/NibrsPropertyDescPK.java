@@ -34,4 +34,10 @@ public class NibrsPropertyDescPK implements Serializable {
     private long propertyId;
     @Column(name = "prop_desc_id", nullable = false)
     private short propDescId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsPropertyDescPK[" + propertyId + ", " + propDescId + "]";
+    }
+
 }

@@ -26,7 +26,7 @@ public class AgenciesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Agencies> findAgenciesById(@PathVariable("id") Long id) {
-        var agency = agenciesService.findAgencyById(id);
+        var agency = agenciesService.getAgenciesById(id);
         log.debug("Controller, Agency -> {}", agency);
         return ResponseEntity.ok(agency);
     }

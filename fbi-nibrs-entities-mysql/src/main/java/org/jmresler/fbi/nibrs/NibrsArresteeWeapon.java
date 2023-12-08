@@ -48,4 +48,8 @@ public class NibrsArresteeWeapon implements Serializable {
     @ManyToOne(optional = false)
     private NibrsWeaponType nibrsWeaponType;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsArresteeWeapon[...]";
+    }
 }

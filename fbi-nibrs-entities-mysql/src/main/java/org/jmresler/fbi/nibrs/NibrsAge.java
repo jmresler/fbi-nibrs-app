@@ -22,11 +22,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
 @Data
 @Entity
 @Table(name = "nibrs_age")
@@ -48,5 +43,10 @@ public class NibrsAge implements Serializable {
     private Collection<NibrsOffender> nibrsOffenderCollection;
     @OneToMany(mappedBy = "ageId")
     private Collection<NibrsVictim> nibrsVictimCollection;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsAge[" + ageId + "]";
+    }
 
 }

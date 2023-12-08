@@ -46,4 +46,10 @@ public class NibrsCriminalActType implements Serializable {
     private String criminalActDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsCriminalActType")
     private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsCriminalActType[" + criminalActId + "]";
+    }
+
 }

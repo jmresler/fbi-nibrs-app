@@ -44,4 +44,10 @@ public class NibrsPropLossType implements Serializable {
     private String propLossDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propLossId")
     private Collection<NibrsProperty> nibrsPropertyCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsPropLossType[" + propLossId + "]";
+    }
+
 }

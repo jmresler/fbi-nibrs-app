@@ -44,4 +44,10 @@ public class NibrsDrugMeasureType implements Serializable {
     private String drugMeasureName;
     @OneToMany(mappedBy = "drugMeasureTypeId")
     private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsDrugMeasureType[" + drugMeasureTypeId + "]";
+    }
+
 }

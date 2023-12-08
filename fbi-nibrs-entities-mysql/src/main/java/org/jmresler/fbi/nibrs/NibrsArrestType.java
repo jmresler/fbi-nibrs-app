@@ -46,4 +46,10 @@ public class NibrsArrestType implements Serializable {
     @OneToMany(mappedBy = "arrestTypeId")
     private Collection<NibrsArrestee> nibrsArresteeCollection;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsArrestType[" + arrestTypeId + ", " + arrestTypeCode + ", " + arrestTypeCode + "]";
+    }
+
+
 }

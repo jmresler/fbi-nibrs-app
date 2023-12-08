@@ -44,4 +44,10 @@ public class NibrsLocationType implements Serializable {
     private String locationName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
     private Collection<NibrsOffense> nibrsOffenseCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsLocationType[" + locationId + "]";
+    }
+
 }

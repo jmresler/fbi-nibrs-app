@@ -37,4 +37,10 @@ public class NibrsCriminalActPK implements Serializable {
     @Column(name = "offense_id", nullable = false)
     private long offenseId;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsCriminalActPK[" + criminalActId + ", " + offenseId + "]";
+    }
+
+
 }

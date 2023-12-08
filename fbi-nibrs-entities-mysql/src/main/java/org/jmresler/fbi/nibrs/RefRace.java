@@ -56,4 +56,10 @@ public class RefRace implements Serializable {
     private Collection<NibrsOffender> nibrsOffenderCollection;
     @OneToMany(mappedBy = "raceId")
     private Collection<NibrsVictim> nibrsVictimCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.RefRace[" + raceId + "]";
+    }
+
 }

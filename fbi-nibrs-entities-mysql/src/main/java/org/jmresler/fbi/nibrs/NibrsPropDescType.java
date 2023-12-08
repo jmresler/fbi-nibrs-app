@@ -44,4 +44,10 @@ public class NibrsPropDescType implements Serializable {
     private String propDescCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsPropDescType")
     private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsPropDescType[" + propDescId + "]";
+    }
+
 }

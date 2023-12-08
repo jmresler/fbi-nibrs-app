@@ -46,4 +46,10 @@ public class NibrsClearedExcept implements Serializable {
     private String clearedExceptDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clearedExceptId")
     private Collection<NibrsIncident> nibrsIncidentCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsClearedExcept[" + clearedExceptId + "]";
+    }
+
 }

@@ -48,4 +48,10 @@ public class NibrsEthnicity implements Serializable {
     private Collection<NibrsOffender> nibrsOffenderCollection;
     @OneToMany(mappedBy = "ethnicityId")
     private Collection<NibrsVictim> nibrsVictimCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsEthnicity[" + ethnicityId + "]";
+    }
+
 }

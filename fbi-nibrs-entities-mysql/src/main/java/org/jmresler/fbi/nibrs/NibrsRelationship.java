@@ -44,4 +44,10 @@ public class NibrsRelationship implements Serializable {
     private String relationshipName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "relationshipId")
     private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsRelationship[" + relationshipId + "]";
+    }
+
 }
