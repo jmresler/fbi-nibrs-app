@@ -20,8 +20,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -35,7 +35,9 @@ public class NibrsMonth implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
+    @Id
+    @Column(name = "did", nullable = false)
+    private Long did;
     @Column(name = "data_year")
     private Integer dataYear;
     @Column(name = "nibrs_month_id", nullable = false)
@@ -57,14 +59,17 @@ public class NibrsMonth implements Serializable {
     private String dataHome;
     @Column(name = "ddocname", length = 50)
     private String ddocname;
-    @Id
-    @Column(name = "did", nullable = false)
-    private Long did;
     @Column(name = "month_pub_status")
     private Integer monthPubStatus;
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
     private Agencies agencyId;
     @OneToMany(mappedBy = "did")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsMonth[" + did + "]";
+    }
+
 }

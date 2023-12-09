@@ -20,13 +20,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
 @Data
 @Entity
 @Table(name = "nibrs_activity_type")
@@ -43,5 +38,10 @@ public class NibrsActivityType implements Serializable {
     @Column(name = "activity_type_name", length = 100)
     private String activityTypeName;
     @OneToMany(mappedBy = "activityTypeId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsActivityType[" + activityTypeId + "]";
+    }
 }

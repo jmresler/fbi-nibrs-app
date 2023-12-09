@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -35,23 +35,29 @@ public class NibrsProperty implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "data_year")
-    private Integer dataYear;
     @Id
     @Column(name = "property_id", nullable = false)
     private Long propertyId;
+    @Column(name = "data_year")
+    private Integer dataYear;
     @Column(name = "stolen_count")
     private Short stolenCount;
     @Column(name = "recovered_count")
     private Short recoveredCount;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsProperty")
-    private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
+    private List<NibrsPropertyDesc> nibrsPropertyDescList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
-    private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;
     @JoinColumn(name = "prop_loss_id", referencedColumnName = "prop_loss_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsPropLossType propLossId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsProperty[" + propertyId + "]";
+    }
+
 }

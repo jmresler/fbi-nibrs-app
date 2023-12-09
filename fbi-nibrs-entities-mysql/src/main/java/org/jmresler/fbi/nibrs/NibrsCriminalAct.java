@@ -44,4 +44,10 @@ public class NibrsCriminalAct implements Serializable {
     @JoinColumn(name = "offense_id", referencedColumnName = "offense_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsOffense nibrsOffense;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsCriminalAct[...]";
+    }
+
 }

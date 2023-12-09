@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,6 +43,12 @@ public class NibrsAssignmentType implements Serializable {
     @Column(name = "assignment_type_name", length = 100)
     private String assignmentTypeName;
     @OneToMany(mappedBy = "assignmentTypeId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsAssignmentType[" + assignmentTypeId + ", " + assignmentTypeCode + ", " + assignmentTypeCode + "]";
+    }
 
 }

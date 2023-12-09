@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -45,5 +45,11 @@ public class NibrsClearedExcept implements Serializable {
     @Column(name = "cleared_except_desc", length = 300)
     private String clearedExceptDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clearedExceptId")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsClearedExcept[" + clearedExceptId + "]";
+    }
+
 }

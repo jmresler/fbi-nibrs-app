@@ -12,12 +12,12 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      enabled: true
+      enabled: false
   datasource:
     nibrs:
       driver-class-name: org.postgresql.Driver
-      name: johnm
-      password: 'Kadena1988#'
+      name: jmres
+      password: jmlawb36
       url: jdbc:postgresql://localhost:5432/nibrs
       hikari:
         transaction-isolation: TRANSACTION_READ_UNCOMMITTED
@@ -29,6 +29,7 @@ spring:
       hikari:
         transaction-isolation: TRANSACTION_READ_UNCOMMITTED
   jpa:
+    database: postgresql
     open-in-view: true
     properties:
       hibernate:

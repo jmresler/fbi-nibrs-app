@@ -21,8 +21,8 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -83,5 +83,11 @@ public class NibrsArrestee implements Serializable {
     @ManyToOne(optional = false)
     private RefRace raceId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsArrestee")
-    private Collection<NibrsArresteeWeapon> nibrsArresteeWeaponCollection;
+    private List<NibrsArresteeWeapon> nibrsArresteeWeaponList;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsArrestee[" + arresteeId + "]";
+    }
+
 }

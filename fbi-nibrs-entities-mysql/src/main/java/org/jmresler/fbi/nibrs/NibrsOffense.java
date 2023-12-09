@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -35,11 +35,11 @@ public class NibrsOffense implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "data_year")
-    private Integer dataYear;
     @Id
     @Column(name = "offense_id", nullable = false)
     private Long offenseId;
+    @Column(name = "data_year")
+    private Integer dataYear;
     @Column(name = "attempt_complete_flag")
     private Character attemptCompleteFlag;
     @Column(name = "num_premises_entered")
@@ -56,13 +56,19 @@ public class NibrsOffense implements Serializable {
     @ManyToOne(optional = false)
     private NibrsOffenseType offenseCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    private List<NibrsVictimOffense> nibrsVictimOffenseList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsWeapon> nibrsWeaponCollection;
+    private List<NibrsWeapon> nibrsWeaponList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+    private List<NibrsCriminalAct> nibrsCriminalActList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    private List<NibrsBiasMotivation> nibrsBiasMotivationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsSuspectUsing> nibrsSuspectUsingCollection;
+    private List<NibrsSuspectUsing> nibrsSuspectUsingList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsOffense[" + offenseId + "]";
+    }
+
 }

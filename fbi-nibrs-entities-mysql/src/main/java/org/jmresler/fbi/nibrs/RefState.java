@@ -56,4 +56,10 @@ public class RefState implements Serializable {
     private Short statePubFreqMonths;
     @Column(name = "change_user", length = 100)
     private String changeUser;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.RefState[" + stateId + "]";
+    }
+
 }

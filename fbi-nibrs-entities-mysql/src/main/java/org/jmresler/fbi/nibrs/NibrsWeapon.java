@@ -47,4 +47,10 @@ public class NibrsWeapon implements Serializable {
     @JoinColumn(name = "weapon_id", referencedColumnName = "weapon_id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private NibrsWeaponType nibrsWeaponType;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsWeapon[...]";
+    }
+
 }

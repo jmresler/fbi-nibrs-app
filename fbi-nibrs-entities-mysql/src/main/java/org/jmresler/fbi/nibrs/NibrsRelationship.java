@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,5 +43,11 @@ public class NibrsRelationship implements Serializable {
     @Column(name = "relationship_name", length = 100)
     private String relationshipName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "relationshipId")
-    private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
+    private List<NibrsVictimOffenderRel> nibrsVictimOffenderRelList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsRelationship[" + relationshipId + "]";
+    }
+
 }

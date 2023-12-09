@@ -22,6 +22,14 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		log.debug("Agency status: {}", repository.findById(2).orElse(EMPTY_AGENCY).getAgencyStatus());
+		EMPTY_AGENCY.setAgencyId(-1);
+		var agency = repository.findById(49).orElse(EMPTY_AGENCY);
+
+		if (agency.getAgencyId() == -1)
+			log.debug("No agency found for ID 49");
+		else {
+			log.debug("Found agency (49) -> {}", agency.toString());
+		}
+
 	}
 }

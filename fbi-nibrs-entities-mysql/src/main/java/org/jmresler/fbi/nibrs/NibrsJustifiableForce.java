@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,5 +43,11 @@ public class NibrsJustifiableForce implements Serializable {
     @Column(name = "justifiable_force_name", length = 100)
     private String justifiableForceName;
     @OneToMany(mappedBy = "justifiableForceId")
-    private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+    private List<NibrsVictimCircumstances> nibrsVictimCircumstancesList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsJustifiableForce[" + justifiableForceId + "]";
+    }
+
 }

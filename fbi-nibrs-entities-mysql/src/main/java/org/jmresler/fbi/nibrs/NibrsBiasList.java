@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -45,7 +45,12 @@ public class NibrsBiasList implements Serializable {
     @Column(name = "bias_desc", length = 100)
     private String biasDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsBiasList")
-    private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    private List<NibrsBiasMotivation> nibrsBiasMotivationList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsBiasList[" + biasId + "]";
+    }
 
 
 }

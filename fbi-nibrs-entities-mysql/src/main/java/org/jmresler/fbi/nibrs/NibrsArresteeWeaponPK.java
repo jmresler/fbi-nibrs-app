@@ -37,5 +37,10 @@ public class NibrsArresteeWeaponPK implements Serializable {
     @Column(name = "weapon_id", nullable = false)
     private short weaponId;
 
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsBiasMotivationPK[" + arresteeId + ", " + weaponId + "]";
+    }
+
 
 }

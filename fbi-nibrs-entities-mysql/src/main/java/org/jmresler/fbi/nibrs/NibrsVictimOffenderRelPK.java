@@ -34,4 +34,10 @@ public class NibrsVictimOffenderRelPK implements Serializable {
     private long victimId;
     @Column(name = "offender_id", nullable = false)
     private long offenderId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsVictimOffenderRelPK[" + victimId + ", " + offenderId + "]";
+    }
+
 }

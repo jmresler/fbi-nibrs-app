@@ -15,33 +15,29 @@
  */
 package org.jmresler.fbi.nibrs;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
 @Data
 @Entity
-@Table(name = "agencies", schema = "public")
+@Table(name = "agencies", catalog = "nibrs", schema = "public")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "agencyId")
 public class Agencies implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
-
-    @Column(name = "yearly_agency_id")
-    private Integer yearlyAgencyId;
     @Id
+    @Basic(optional = false)
     @Column(name = "agency_id", nullable = false)
     private Integer agencyId;
+    @Column(name = "yearly_agency_id")
+    private Integer yearlyAgencyId;
     @Column(name = "data_year")
     private Integer dataYear;
     @Column(name = "ori", length = 25)
@@ -163,7 +159,12 @@ public class Agencies implements Serializable {
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
-    private Collection<NibrsMonth> nibrsMonthCollection;
+    private List<NibrsMonth> nibrsMonthList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.Agencies[" + agencyId + "]";
+    }
 }

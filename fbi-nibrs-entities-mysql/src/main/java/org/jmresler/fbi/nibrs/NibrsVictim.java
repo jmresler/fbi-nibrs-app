@@ -21,7 +21,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -56,11 +56,11 @@ public class NibrsVictim implements Serializable {
     @Column(name = "age_range_high_num")
     private Short ageRangeHighNum;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
-    private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    private List<NibrsVictimOffense> nibrsVictimOffenseList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
-    private Collection<NibrsVictimCircumstances> nibrsVictimCircumstancesCollection;
+    private List<NibrsVictimCircumstances> nibrsVictimCircumstancesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
-    private Collection<NibrsVictimInjury> nibrsVictimInjuryCollection;
+    private List<NibrsVictimInjury> nibrsVictimInjuryList;
     @JoinColumn(name = "activity_type_id", referencedColumnName = "activity_type_id")
     @ManyToOne
     private NibrsActivityType activityTypeId;
@@ -83,5 +83,11 @@ public class NibrsVictim implements Serializable {
     @ManyToOne
     private RefRace raceId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsVictim")
-    private Collection<NibrsVictimOffenderRel> nibrsVictimOffenderRelCollection;
+    private List<NibrsVictimOffenderRel> nibrsVictimOffenderRelList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsVictim[" + victimId + "]";
+    }
+
 }

@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,5 +43,11 @@ public class NibrsPropLossType implements Serializable {
     @Column(name = "prop_loss_desc", length = 250)
     private String propLossDesc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propLossId")
-    private Collection<NibrsProperty> nibrsPropertyCollection;
+    private List<NibrsProperty> nibrsPropertyList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsPropLossType[" + propLossId + "]";
+    }
+
 }

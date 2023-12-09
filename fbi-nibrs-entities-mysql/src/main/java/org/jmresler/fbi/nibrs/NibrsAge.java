@@ -20,13 +20,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
-/**
- *
- * @author John M. Resler
- * @version 1.0.0
- */
 @Data
 @Entity
 @Table(name = "nibrs_age")
@@ -43,10 +38,15 @@ public class NibrsAge implements Serializable {
     @Column(name = "age_name", length = 100)
     private String ageName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ageId")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @OneToMany(mappedBy = "ageId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @OneToMany(mappedBy = "ageId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+    @Override
+    public String toString() {
+        return "org.jmresler.fbi.nibrs.NibrsAge[" + ageId + "]";
+    }
 
 }

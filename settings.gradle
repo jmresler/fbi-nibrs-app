@@ -1,4 +1,5 @@
 rootProject.name = 'fbi-nibrs-applications'
-include('batch-data-loader')
+include('batch-entity-tester')
 include('fbi-nibrs-entities-mysql')
 include('fbi-nibrs-entities-postgres')
+include('nibrs-web-tester')

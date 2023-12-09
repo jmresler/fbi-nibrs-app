@@ -34,4 +34,10 @@ public class NibrsVictimCircumstancesPK implements Serializable {
     private long victimId;
     @Column(name = "circumstances_id", nullable = false)
     private short circumstancesId;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsVictimCircumstancesPK[" + victimId + ", " + circumstancesId + "]";
+    }
+
 }

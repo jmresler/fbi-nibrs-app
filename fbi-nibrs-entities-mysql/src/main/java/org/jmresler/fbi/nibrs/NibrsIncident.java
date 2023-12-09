@@ -20,8 +20,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -64,10 +64,10 @@ public class NibrsIncident implements Serializable {
     private Character dataHome;
     @Column(name = "orig_format")
     private Character origFormat;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId", fetch = FetchType.EAGER)
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId", fetch = FetchType.EAGER)
-    private Collection<NibrsOffense> nibrsOffenseCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
+    private List<NibrsArrestee> nibrsArresteeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
+    private List<NibrsOffense> nibrsOffenseList;
     @JoinColumn(name = "agency_id", referencedColumnName = "agency_id", nullable = false)
     @ManyToOne(optional = false)
     private Agencies agencyId;
@@ -78,9 +78,15 @@ public class NibrsIncident implements Serializable {
     @ManyToOne
     private NibrsMonth did;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsProperty> nibrsPropertyCollection;
+    private List<NibrsProperty> nibrsPropertyList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "incidentId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
+
+    @Override
+    public String toString() {
+        return  "org.jmresler.fbi.nibrs.NibrsIncident[" + incidentId + "]";
+    }
+
 }
