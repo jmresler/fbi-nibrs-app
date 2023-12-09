@@ -21,8 +21,8 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The Agencies class represents a database entity that stores information about law enforcement agencies.
@@ -163,9 +163,9 @@ public class Agencies implements Serializable {
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
-    private Collection<NibrsMonth> nibrsMonthCollection;
+    private List<NibrsMonth> nibrsMonthList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
 
     @Override
     public String toString() {

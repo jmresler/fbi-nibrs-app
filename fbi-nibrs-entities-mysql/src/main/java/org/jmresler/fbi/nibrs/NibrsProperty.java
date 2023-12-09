@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -45,9 +45,9 @@ public class NibrsProperty implements Serializable {
     @Column(name = "recovered_count")
     private Short recoveredCount;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsProperty")
-    private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
+    private List<NibrsPropertyDesc> nibrsPropertyDescList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
-    private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
     @JoinColumn(name = "incident_id", referencedColumnName = "incident_id", nullable = false)
     @ManyToOne(optional = false)
     private NibrsIncident incidentId;

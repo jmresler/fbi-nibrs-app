@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -56,15 +56,15 @@ public class NibrsOffense implements Serializable {
     @ManyToOne(optional = false)
     private NibrsOffenseType offenseCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsVictimOffense> nibrsVictimOffenseCollection;
+    private List<NibrsVictimOffense> nibrsVictimOffenseList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsWeapon> nibrsWeaponCollection;
+    private List<NibrsWeapon> nibrsWeaponList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsCriminalAct> nibrsCriminalActCollection;
+    private List<NibrsCriminalAct> nibrsCriminalActList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsBiasMotivation> nibrsBiasMotivationCollection;
+    private List<NibrsBiasMotivation> nibrsBiasMotivationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsOffense")
-    private Collection<NibrsSuspectUsing> nibrsSuspectUsingCollection;
+    private List<NibrsSuspectUsing> nibrsSuspectUsingList;
 
     @Override
     public String toString() {

@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,7 +43,7 @@ public class NibrsPropDescType implements Serializable {
     @Column(name = "prop_desc_code", length = 2)
     private String propDescCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsPropDescType")
-    private Collection<NibrsPropertyDesc> nibrsPropertyDescCollection;
+    private List<NibrsPropertyDesc> nibrsPropertyDescList;
 
     @Override
     public String toString() {

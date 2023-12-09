@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -45,9 +45,9 @@ public class NibrsWeaponType implements Serializable {
     @Column(name = "shr_flag")
     private Character shrFlag;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsWeaponType")
-    private Collection<NibrsArresteeWeapon> nibrsArresteeWeaponCollection;
+    private List<NibrsArresteeWeapon> nibrsArresteeWeaponList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nibrsWeaponType")
-    private Collection<NibrsWeapon> nibrsWeaponCollection;
+    private List<NibrsWeapon> nibrsWeaponList;
 
     @Override
     public String toString() {

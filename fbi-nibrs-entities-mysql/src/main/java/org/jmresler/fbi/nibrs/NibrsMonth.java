@@ -20,8 +20,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -65,7 +65,7 @@ public class NibrsMonth implements Serializable {
     @ManyToOne(optional = false)
     private Agencies agencyId;
     @OneToMany(mappedBy = "did")
-    private Collection<NibrsIncident> nibrsIncidentCollection;
+    private List<NibrsIncident> nibrsIncidentList;
 
     @Override
     public String toString() {

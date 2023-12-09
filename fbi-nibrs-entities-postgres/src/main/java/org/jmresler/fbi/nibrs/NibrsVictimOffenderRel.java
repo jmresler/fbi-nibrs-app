@@ -22,7 +22,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.StringJoiner;
 
 @Data
 @Entity

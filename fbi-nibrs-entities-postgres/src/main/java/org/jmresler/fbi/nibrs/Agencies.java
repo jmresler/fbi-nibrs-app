@@ -16,7 +16,6 @@
 package org.jmresler.fbi.nibrs;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,7 +24,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.StringJoiner;
 
 @Data
 @Entity
@@ -160,9 +158,9 @@ public class Agencies implements Serializable {
     private String participated;
     @Column(name = "nibrs_participated", length = 1)
     private String nibrsParticipated;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
     private List<NibrsMonth> nibrsMonthList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencyId")
     private List<NibrsIncident> nibrsIncidentList;
 
     @Override

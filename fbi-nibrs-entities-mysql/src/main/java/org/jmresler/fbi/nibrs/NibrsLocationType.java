@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,7 +43,7 @@ public class NibrsLocationType implements Serializable {
     @Column(name = "location_name", length = 100)
     private String locationName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
-    private Collection<NibrsOffense> nibrsOffenseCollection;
+    private List<NibrsOffense> nibrsOffenseList;
 
     @Override
     public String toString() {

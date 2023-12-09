@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,11 +43,11 @@ public class NibrsEthnicity implements Serializable {
     @Column(name = "ethnicity_name", length = 100)
     private String ethnicityName;
     @OneToMany(mappedBy = "ethnicityId")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @OneToMany(mappedBy = "ethnicityId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @OneToMany(mappedBy = "ethnicityId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
 
     @Override
     public String toString() {

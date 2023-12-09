@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -38,7 +38,7 @@ public class NibrsActivityType implements Serializable {
     @Column(name = "activity_type_name", length = 100)
     private String activityTypeName;
     @OneToMany(mappedBy = "activityTypeId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
 
     @Override
     public String toString() {

@@ -18,7 +18,7 @@ package org.jmresler.fbi.nibrs;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigInteger;

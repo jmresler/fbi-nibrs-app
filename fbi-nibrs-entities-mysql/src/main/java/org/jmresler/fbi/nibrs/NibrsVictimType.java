@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,7 +43,7 @@ public class NibrsVictimType implements Serializable {
     @Column(name = "victim_type_name", length = 100)
     private String victimTypeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "victimTypeId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
 
     @Override
     public String toString() {

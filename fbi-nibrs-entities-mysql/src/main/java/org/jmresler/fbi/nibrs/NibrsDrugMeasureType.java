@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -43,7 +43,7 @@ public class NibrsDrugMeasureType implements Serializable {
     @Column(name = "drug_measure_name", length = 100)
     private String drugMeasureName;
     @OneToMany(mappedBy = "drugMeasureTypeId")
-    private Collection<NibrsSuspectedDrug> nibrsSuspectedDrugCollection;
+    private List<NibrsSuspectedDrug> nibrsSuspectedDrugList;
 
     @Override
     public String toString() {

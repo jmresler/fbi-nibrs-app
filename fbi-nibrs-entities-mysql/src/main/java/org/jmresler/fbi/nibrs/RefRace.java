@@ -20,7 +20,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -51,11 +51,11 @@ public class RefRace implements Serializable {
     @Column(name = "notes", length = 1000)
     private String notes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "raceId")
-    private Collection<NibrsArrestee> nibrsArresteeCollection;
+    private List<NibrsArrestee> nibrsArresteeList;
     @OneToMany(mappedBy = "raceId")
-    private Collection<NibrsOffender> nibrsOffenderCollection;
+    private List<NibrsOffender> nibrsOffenderList;
     @OneToMany(mappedBy = "raceId")
-    private Collection<NibrsVictim> nibrsVictimCollection;
+    private List<NibrsVictim> nibrsVictimList;
 
     @Override
     public String toString() {
