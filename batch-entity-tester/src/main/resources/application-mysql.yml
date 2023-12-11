@@ -16,14 +16,14 @@ spring:
   datasource:
     nibrs:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      name: johnm
-      password: jmlawb36
+      username: root
+      password: 'password'
       url: jdbc:mysql://localhost:3306/nibrs
       hikari:
         transaction-isolation: TRANSACTION_READ_UNCOMMITTED
     meta:
       driver-class-name: org.h2.Driver
-      name: app
+      username: app
       password: app
       url: jdbc:h2:file:./data/meta
       hikari:

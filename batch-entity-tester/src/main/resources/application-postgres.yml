@@ -16,14 +16,14 @@ spring:
   datasource:
     nibrs:
       driver-class-name: org.postgresql.Driver
-      name: jmres
-      password: jmlawb36
+      username: postgres
+      password: 'password'
       url: jdbc:postgresql://localhost:5432/nibrs
       hikari:
         transaction-isolation: TRANSACTION_READ_UNCOMMITTED
     meta:
       driver-class-name: org.h2.Driver
-      name: app
+      username: app
       password: app
       url: jdbc:h2:file:./data/meta
       hikari:

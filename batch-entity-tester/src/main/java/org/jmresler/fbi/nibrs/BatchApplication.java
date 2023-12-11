@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-public class NibrsWebTesterApplication {
+public class BatchApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(NibrsWebTesterApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(BatchApplication.class, args);
+	}
 }

@@ -14,10 +14,11 @@ spring:
     name: web
   datasource:
     driver-class-name: org.postgresql.Driver
-    name: jmres
-    password: jmlawb36
+    username: jmres
+    password: 'password'
     url: jdbc:postgresql://localhost:5432/nibrs
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: true
     properties:
       hibernate:

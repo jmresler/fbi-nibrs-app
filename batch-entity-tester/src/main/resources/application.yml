@@ -2,7 +2,7 @@ spring:
   application:
     name: nibrs-batch
   profiles:
-    active: ${RUNTIME_ENV:postgres}
+    active: ${RUNTIME_ENV:mysql}
 
 org:
   jmresler:
